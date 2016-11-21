@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{b512481b-cc40-44a6-a0d4-18ad089c4e8b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)potto\dllmain.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)potto\potto.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)potto\PottoModuleEntryManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)potto\PottoModulePoolManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\PottoModuleEntryManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\PottoModulePoolManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\potto.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

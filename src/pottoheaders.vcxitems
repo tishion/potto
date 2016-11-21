@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{4C09E7C2-FFDB-4708-A6FB-2B6D6DF49237}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\internal\pottodef.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\internal\pottoexport.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\internal\pottomodule.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\internal\pottoobject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\pottoconf.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\pottoerror.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\pottointerface.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\pottoptr.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\pottouuid.h" />
+  </ItemGroup>
+</Project>
