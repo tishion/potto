@@ -2,7 +2,7 @@
 #define POTTOCONF_H_
 #pragma once
 
-// 
+// No virtual table initialization 
 #if defined(_MSC_VER)
 #	define POTTO_DECLARE_NOVTABLE		__declspec(novtable)
 

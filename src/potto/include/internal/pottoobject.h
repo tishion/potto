@@ -14,12 +14,12 @@
 #include <potto/internal/pottomodule.h>
 
 /// <summary>
-/// 
+/// The invalid offset of This pointer of interface.
 /// </summary>
 #define INTERFACE_INVALID_OFFSET (std::ptrdiff_t)(-1)
 
 /// <summary>
-/// 
+/// Destroyed reference count.
 /// </summary>
 #define PROTECT_REFCOUNT (0x0FFFFFFF / 2)
 
@@ -28,6 +28,11 @@ namespace Potto
 	/// <summary>
 	/// 
 	/// </summary>
+	/// <param name="pThis"></param>
+	/// <param name="pEntries"></param>
+	/// <param name="riid"></param>
+	/// <param name="ppvObject"></param>
+	/// <returns></returns>
 	static POTTO_ERROR PottoInternalQueryInterface(void* pThis,
 		const InterfaceEntry* pEntries,
 		const PottoUuid& riid,
@@ -75,7 +80,7 @@ namespace Potto
 	}
 
 	/// <summary>
-	/// 
+	/// The potto object root base class.
 	/// </summary>
 	template<class RefCountType = ReferenceCount>
 	class PottoObjectRootBase
@@ -98,6 +103,7 @@ namespace Potto
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <returns></returns>
 		unsigned long InternalAddRef()
 		{
 			return ++m_nRefCnt;
@@ -106,6 +112,7 @@ namespace Potto
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <returns></returns>
 		unsigned long InternalRelease()
 		{
 			return --m_nRefCnt;
@@ -114,6 +121,7 @@ namespace Potto
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <returns></returns>
 		POTTO_ERROR FinalConstruct()
 		{
 			return POTTO_E_OK;
@@ -126,6 +134,14 @@ namespace Potto
 		{
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="pThis"></param>
+		/// <param name="pEntries"></param>
+		/// <param name="riid"></param>
+		/// <param name="ppvObject"></param>
+		/// <returns></returns>
 		static POTTO_ERROR InternalQueryInterface(
 			void* pThis,
 			const InterfaceEntry* pEntries,
@@ -152,35 +168,43 @@ namespace Potto
 			PottoAssert(m_nRefCnt == 0, "Reference count is not zeor.");
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		void Lock()
 		{
 			m_mtxLock.lock();
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		void Unlock()
 		{
 			m_mtxLock.unlock();
 		}
 
 	public:
+		/// <summary>
+		/// 
+		/// </summary>
 		RefCountType m_nRefCnt;
+		
+		/// <summary>
+		/// 
+		/// </summary>
 		std::mutex	 m_mtxLock;
 	};
 
-	///// <summary>
-	///// Represents the root base class with single threaded mode.
-	///// </summary>
-	//typedef PottoObjectRootBase<ReferenceCount>	PottoObjectRootBase;
-
 	/// <summary>
-	/// Represents the root base class with multi threaded mode.
+	/// The root base class with multi threaded mode.
 	/// </summary>
 	typedef PottoObjectRootBase<ThreadSafeReferenceCount> PottoThreadSafeObjectRootBase;
 
 	///////////////////////////////////////////////////////////////////////
 
 	/// <summary>
-	/// Represents the user potto com object class.
+	/// The user potto com object class.
 	/// </summary>
 	template <class Base>
 	class PottoObject : public Base
@@ -236,8 +260,11 @@ namespace Potto
 		}
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
+		/// <param name="riid"></param>
+		/// <param name="pp"></param>
+		/// <returns></returns>
 		virtual POTTO_ERROR QueryInterface(const PottoUuid& riid, void** pp)
 		{
 			return _InternalQueryInterface(riid, pp);
@@ -246,6 +273,8 @@ namespace Potto
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="pp"></param>
+		/// <returns></returns>
 		template <class Q>
 		POTTO_ERROR QueryInterface(const PottoUuid& pp)
 		{
@@ -255,12 +284,11 @@ namespace Potto
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="pp"></param>
+		/// <returns></returns>
 		static POTTO_ERROR CreateInstance(PottoObject<Base>** pp);
 	};
 
-	/// <summary>
-	/// 
-	/// </summary>
 	template <class Base>
 	POTTO_ERROR PottoObject<Base>::CreateInstance(PottoObject<Base>** pp)
 	{
@@ -296,7 +324,7 @@ namespace Potto
 	}
 
 	/// <summary>
-	/// 
+	/// The cached potto object.
 	/// </summary>
 	template <class Base>
 	class PottoCachedObject : public Base
@@ -310,7 +338,7 @@ namespace Potto
 		/// <summary>
 		/// 
 		/// </summary>
-		PottoCachedObject(_In_opt_ void* = NULL)
+		PottoCachedObject()
 		{
 		}
 
@@ -326,6 +354,7 @@ namespace Potto
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <returns></returns>
 		virtual unsigned long AddRef()
 		{
 			unsigned long  l = InternalAddRef();
@@ -337,6 +366,7 @@ namespace Potto
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <returns></returns>
 		virtual unsigned long Release()
 		{
 			unsigned long  l = InternalRelease();
@@ -350,6 +380,9 @@ namespace Potto
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="riid"></param>
+		/// <param name="pp"></param>
+		/// <returns></returns>
 		virtual POTTO_ERROR QueryInterface(const PottoUuid& riid, void** pp)
 		{
 			return _InternalQueryInterface(riid, pp);
@@ -358,12 +391,11 @@ namespace Potto
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="pp"></param>
+		/// <returns></returns>
 		static POTTO_ERROR CreateInstance(PottoCachedObject<Base>** pp);
 	};
 
-	/// <summary>
-	/// 
-	/// </summary>
 	template <class Base>
 	POTTO_ERROR PottoCachedObject<Base>::CreateInstance(PottoCachedObject<Base>** pp)
 	{
@@ -400,12 +432,18 @@ namespace Potto
 	///////////////////////////////////////////////////////////////////////
 
 	/// <summary>
-	/// 
+	/// Potto object creator.
 	/// </summary>
 	template <class T>
 	class PottoObjectCreator
 	{
 	public:
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="riid"></param>
+		/// <param name="ppv"></param>
+		/// <returns></returns>
 		static POTTO_ERROR CreateInstance(
 			const PottoUuid& riid,
 			void** ppv)
@@ -439,12 +477,17 @@ namespace Potto
 	};
 
 	/// <summary>
-	/// 
+	/// Potto class register.
 	/// </summary>
 	template <class T>
 	class PottoClassRegister
 	{
 	public:
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="id"></param>
 		PottoClassRegister(const std::string& name, const PottoUuid& id)
 		{
 			ClassEntry* pEntry = new ClassEntry
@@ -461,7 +504,7 @@ namespace Potto
 }
 
 /// <summary>
-/// 
+/// The begin of a single threaded potto object.
 /// </summary>
 #define POTTO_SINGLEHREADED_OBJECT(clsid, name) \
 const char* const CLSID_##name = clsid; \
@@ -469,7 +512,7 @@ POTTO_DECLARE_NOVTABLE name : public Potto::PottoObjectRootBase \
 , public Potto::PottoObjectClass<name>
 
 /// <summary>
-/// 
+/// The begin of a multiple threaded potto object.
 /// </summary>
 #define POTTO_MULTITHREADED_OBJECT(clsid, name) \
 const char* const CLSID_##name = clsid; \
@@ -477,57 +520,81 @@ class POTTO_DECLARE_NOVTABLE name : public Potto::PottoThreadSafeObjectRootBase 
 , public Potto::PottoObjectClass<name>
 
 /// <summary>
-/// 
+/// Implements an interface.
 /// </summary>
 #define POTTO_IMPLEMENT_INTERFACE(name) , public name
 
 /// <summary>
-/// 
+/// Declares the class factory.
 /// </summary>
 #define DECLARE_CLASSFACTORY \
 typedef Potto::PottoObjectCreator<Potto::PottoCachedObject<Potto::PottoClassFactory>> _ClassFactoryCreatorClass;
 
 /// <summary>
-/// 
+/// Declares the singleton class factory.
 /// </summary>
 #define DECLARE_SINGLETON_CLASSFACTORY(name) \
 typedef Potto::PottoObjectCreator<Potto::PottoCachedObject<Potto::PottoClassSingletonFactory<name>>> _ClassFactoryCreatorClass;
 
+/// <summary>
+/// The begin of the interface entry map.
+/// </summary>
 #define POTTO_BEGIN_INTERFACE_MAP(c) POTTO_ERROR _InternalQueryInterface(const PottoUuid& iid, void** ppvObject) \
 	{ return InternalQueryInterface(this, _GetEntries(), iid, ppvObject); } \
 	const static InterfaceEntry* _GetEntries() { typedef c _PottoObjectType; static const InterfaceEntry _entries[] = {
 
+/// <summary>
+/// Gets the offset of This pointer.
+/// </summary>
 #define POTTO_OFFSET_OF(b, i) ((ptrdiff_t)(static_cast<b*>((i*)0x08)) - 0x08)
+
+/// <summary>
+/// Define a potto interface entry.
+/// </summary>
 #define POTTO_INTERFACE_ENTRY(i) { IID_##i, POTTO_OFFSET_OF(i, _PottoObjectType) },
 
+/// <summary>
+/// The end of the interface entry map.
+/// </summary>
 #define POTTO_END_INTERFACE_MAP() { PottoUuid(), INTERFACE_INVALID_OFFSET } }; return _entries; } \
 	virtual unsigned long AddRef() = 0; \
 	virtual unsigned long Release() = 0; \
 	virtual POTTO_ERROR QueryInterface(const PottoUuid& interfaceId, void** pp) = 0;
 
 /// <summary>
-/// 
+/// Define a potto class register.
 /// </summary>
 #define POTTO_CLASS_REGISTER(name) static Potto::PottoClassRegister<name> _##name##_autoregister(#name, CLSID_##name);
 
 namespace Potto
 {
 	/// <summary>
-	/// 
+	/// The potto factory.
 	/// </summary>
-	class POTTO_DECLARE_NOVTABLE PottoClassFactory
-		: public PottoThreadSafeObjectRootBase
-		, public IClassFactory
+	class POTTO_DECLARE_NOVTABLE PottoClassFactory : public PottoThreadSafeObjectRootBase, public IClassFactory
 	{
 	public:
+
 		POTTO_BEGIN_INTERFACE_MAP(PottoClassFactory)
 			POTTO_INTERFACE_ENTRY(IClassFactory)
 		POTTO_END_INTERFACE_MAP()
 
+		/// <summary>
+		/// 
+		/// </summary>
 		PottoClassFactory() : m_pfnObjectCreator(nullptr) {}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		virtual ~PottoClassFactory() {}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="riid"></param>
+		/// <param name="ppv"></param>
+		/// <returns></returns>
 		POTTO_ERROR CreateInstance(const PottoUuid& riid, void** ppv) override
 		{
 			PottoAssert(m_pfnObjectCreator != NULL, "");
@@ -540,6 +607,10 @@ namespace Potto
 			return error;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="p"></param>
 		void SetCreatorFunction(void* p) override
 		{
 			m_pfnObjectCreator = static_cast<TypeObjectCreatorFunction>(p);
@@ -550,20 +621,28 @@ namespace Potto
 	};
 
 	/// <summary>
-	/// /
+	/// The potto singleton factory.
 	/// </summary>
 	template <class T>
-	class POTTO_DECLARE_NOVTABLE PottoClassSingletonFactory
-		: public PottoThreadSafeObjectRootBase
-		, public IClassFactory
+	class POTTO_DECLARE_NOVTABLE PottoClassSingletonFactory : public PottoThreadSafeObjectRootBase, public IClassFactory
 	{
 	public:
+
 		POTTO_BEGIN_INTERFACE_MAP(PottoClassSingletonFactory)
 			POTTO_INTERFACE_ENTRY(IClassFactory)
 		POTTO_END_INTERFACE_MAP()
 
+		/// <summary>
+		/// 
+		/// </summary>
 		virtual ~PottoClassSingletonFactory() {}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="riid"></param>
+		/// <param name="ppv"></param>
+		/// <returns></returns>
 		POTTO_ERROR CreateInstance(const PottoUuid& riid, void** ppv) override
 		{
 			POTTO_ERROR error = POTTO_E_POINTER;
@@ -595,17 +674,25 @@ namespace Potto
 			return error;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		POTTO_ERROR m_Created;
+
+		/// <summary>
+		/// 
+		/// </summary>
 		PottoPtr<IUnknown> m_spObj;
 	};
 
 	/// <summary>
-	/// 
+	/// The potto boject heler class.
 	/// </summary>
 	template <class T>
 	class PottoObjectClass
 	{
 	public:
+
 		DECLARE_CLASSFACTORY
 
 		/// <summary>
@@ -616,6 +703,7 @@ namespace Potto
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <returns></returns>
 		static const PottoUuid& CLSID()
 		{
 			return T::CLSID();
@@ -624,6 +712,8 @@ namespace Potto
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="pp"></param>
+		/// <returns></returns>
 		template <class Q>
 		static POTTO_ERROR CreateInstance(Q** pp)
 		{

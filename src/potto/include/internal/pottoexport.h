@@ -20,17 +20,11 @@
 #endif
 #endif
 
-/// <summary>
-/// 
-/// </summary>
 POTTO_ERROR ModuleCanUnloadNow()
 {
 	return (Potto::PottoModule::GetInstance().GetLockCount() == 0 ? POTTO_E_OK : POTTO_E_FAIL);
 }
 
-/// <summary>
-/// 
-/// </summary>
 POTTO_ERROR ModuleGetClassObject(const Potto::PottoUuid& clsid, const Potto::PottoUuid& iid, void** ppv)
 {
 	auto it = Potto::PottoModule::GetInstance().GetClassEntryMap().find(clsid);
@@ -72,9 +66,6 @@ POTTO_ERROR ModuleGetClassObject(const Potto::PottoUuid& clsid, const Potto::Pot
 	return error;
 }
 
-/// <summary>
-/// 
-/// </summary>
 POTTO_ERROR RegisterModule(Potto::PottoUuid& moduleId, Potto::ClassInfoList& classInfoList)
 {
 	moduleId = Potto::PottoModule::GetInstance().GetId();
@@ -85,7 +76,7 @@ POTTO_ERROR RegisterModule(Potto::PottoUuid& moduleId, Potto::ClassInfoList& cla
 		classInfoList.push_back(Potto::ClassInfo
 		{
 			it->first,
-			it->second->clsName
+			it->second->className
 		});
 	}
 

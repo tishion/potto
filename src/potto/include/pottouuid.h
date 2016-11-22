@@ -14,8 +14,8 @@
 namespace Potto
 {
 #ifdef POTTO_USE_GUID
-	/// /// <summary>
-	/// Represents the UUID class.
+	/// <summary>
+	/// The UUID class.
 	/// </summary>
 	typedef class _PottoUuid
 	{
@@ -80,7 +80,7 @@ namespace Potto
 
 #else
 	/// <summary>
-	/// 
+	/// The UUID class.
 	/// </summary>
 	typedef class _PottoUuid : public std::string
 	{
@@ -100,7 +100,7 @@ namespace Potto
 	} PottoUuid;
 
 	/// <summary>
-	/// 
+	/// Checks whether the two UUID is equal.
 	/// </summary>
 	inline bool IsEqualUuid(const PottoUuid& a, const PottoUuid& b)
 	{
@@ -122,10 +122,20 @@ namespace Potto
 	}
 #endif
 
+	/// <summary>
+	/// PottoUuid list.
+	/// </summary>
 	typedef std::vector<PottoUuid> PottoUuidList;
 }
 
+/// <summary>
+/// Gets the id of interface.
+/// </summary>
 #define IIDOF(x) IID_##x
+
+/// <summary>
+/// Get the id of class.
+/// </summary>
 #define CLSIDOF(x) CLSID_##x
 
 #endif // POTTOUUID_H_

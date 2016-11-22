@@ -17,7 +17,7 @@
 namespace Potto
 {	
 	/// <summary>
-	/// Represents the potto module.
+	/// The potto module base class.
 	/// </summary>
 	class PottoModuleRootBase
 	{
@@ -127,6 +127,9 @@ namespace Potto
 		ClassEntryMap m_classEntryMap;
 	};
 
+	/// <summary>
+	/// The potto module.
+	/// </summary>
 	class PottoModule : public PottoModuleRootBase
 	{
 	public:
@@ -135,6 +138,9 @@ namespace Potto
 	};
 }
 
+/// <summary>
+/// Definition of Potto::PottoModule::GetInstance.
+/// </summary>
 #define POTTO_MODULE(id) \
 Potto::PottoModule& Potto::PottoModule::GetInstance() \
 { \

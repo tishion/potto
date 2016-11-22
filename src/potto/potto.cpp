@@ -6,6 +6,7 @@
 
 namespace Potto
 {
+
 	POTTO_ERROR Initialize(const std::string& moduleDatabase, const std::string& moduleRootPath)
 	{
 		if (PottoModulePoolManager::GetInstance().InitFromLibraryFile(moduleDatabase, moduleRootPath))

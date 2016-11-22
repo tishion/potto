@@ -7,7 +7,7 @@
 namespace Potto
 {
 	/// <summary>
-	/// 
+	/// Smart pointer of Potto object.
 	/// </summary>
 	template<class T>
 	class PottoPtr

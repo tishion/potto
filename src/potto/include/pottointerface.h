@@ -9,16 +9,20 @@
 namespace Potto
 {
 	/// <summary>
-	/// 
+	/// The id of <see cref="IUnknown" />.
 	/// </summary>
 	const char* const IID_IUnknown = "10000000-0000-0000-0000-000000000000";
+
+	/// <summary>
+	/// The Unknown interface. This is the base of all interfaces in Potto Framework.
+	/// </summary>
 	class POTTO_DECLARE_NOVTABLE IUnknown
 	{
 	public:
 		/// <summary>
 		/// 
 		/// </summary>
-		virtual ~IUnknown() {};
+		virtual ~IUnknown() {}
 
 		/// <summary>
 		/// 
@@ -37,16 +41,20 @@ namespace Potto
 	};
 
 	/// <summary>
-	/// 
+	/// The id of class factory interface.
 	/// </summary>
 	const char* const IID_IClassFactory = "10000000-0000-0000-0000-000000000001";
+
+	/// <summary>
+	/// The class factory interface.
+	/// </summary>
 	class POTTO_DECLARE_NOVTABLE IClassFactory : public IUnknown
 	{
 	public:
 		/// <summary>
 		/// 
 		/// </summary>
-		virtual ~IClassFactory() {};
+		virtual ~IClassFactory() {}
 
 		/// <summary>
 		/// 
@@ -61,7 +69,7 @@ namespace Potto
 }
 
 /// <summary>
-/// 
+/// The begin of a interface.
 /// </summary>
 #define POTTO_INTERFACE_BEGINE(iid, name) const char* const IID_##name = iid; \
 class POTTO_DECLARE_NOVTABLE name : public Potto::IUnknown \
@@ -70,12 +78,12 @@ public: \
 	virtual ~name() {};
 
 /// <summary>
-/// 
+/// Declares a method.
 /// </summary>
 #define POTTO_METHOD(_type, _name_arg) virtual _type _name_arg = 0;
 
 /// <summary>
-/// 
+/// The end of the interface.
 /// </summary>
 #define POTTO_INTERFACE_END };
 
