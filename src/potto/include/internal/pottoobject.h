@@ -686,7 +686,7 @@ namespace Potto
 	};
 
 	/// <summary>
-	/// The potto boject heler class.
+	/// The potto object helper class.
 	/// </summary>
 	template <class T>
 	class PottoObjectClass
