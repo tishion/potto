@@ -1,6 +1,6 @@
 #pragma once
 
-#include <potto/pottointerface.h>
+#include <potto/pottointerface.hpp>
 
 /// <summary>
 ///

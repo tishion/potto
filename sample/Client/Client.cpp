@@ -4,9 +4,9 @@
 #include "stdafx.h"
 #include <windows.h>
 #include <filesystem>
-#include <potto/pottouuid.h>
-#include <potto/pottoptr.h>
-#include <potto/pottointerface.h>
+#include <potto/pottouuid.hpp>
+#include <potto/pottoptr.hpp>
+#include <potto/pottointerface.hpp>
 
 #define POTTO_STATIC_LIB
 #include <potto/potto.h>

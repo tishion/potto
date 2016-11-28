@@ -14,14 +14,14 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\internal\pottodef.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\internal\pottoexport.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\internal\pottomodule.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\internal\pottoobject.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\pottoconf.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\pottoerror.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\pottointerface.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\pottoptr.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\pottouuid.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\internal\pottodef.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\internal\pottoexport.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\internal\pottomodule.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\internal\pottoobject.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\pottoconf.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\pottoerror.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\pottointerface.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\pottoptr.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\pottouuid.hpp" />
   </ItemGroup>
 </Project>

@@ -9,10 +9,11 @@
 #include <fstream>
 #include <string>
 #include <sstream>
-#include <potto/pottouuid.h>
-#include <potto/internal/pottodef.h>
 #include <rapidxml/rapidxml.hpp>
 #include <rapidxml/rapidxml_print.hpp>
+#include <potto/pottouuid.hpp>
+#include <potto/internal/pottodef.hpp>
+
 
 bool GetModuleIdAndClassInfo(const std::string& inputModuleFile, Potto::PottoUuid& moduleId, Potto::ClassInfoList& classInfoList)
 {

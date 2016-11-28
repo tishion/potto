@@ -4,23 +4,46 @@
 #include <map>
 #include <mutex>
 #include <string>
-#include <potto/pottouuid.h>
+#include <potto/pottouuid.hpp>
 
 namespace Potto
 {
-
+	/// <summary>
+	/// The management class of module path pool.
+	/// </summary>
 	class PottoModulePoolManager
 	{
 	public:
+		/// <summary>
+		/// Gets the instance of the class.
+		/// </summary>
+		/// <returns>The reference to the singleton instance.</returns>
 		static PottoModulePoolManager& GetInstance();
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="libraryPath"></param>
+		/// <param name="moduleRootPath"></param>
+		/// <returns></returns>
 		bool InitFromLibraryFile(const std::string& libraryPath, const std::string& moduleRootPath);
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
 		const std::string GetModulePathByClassId(const PottoUuid& id) const;
 
 	protected:
+		/// <summary>
+		/// Constructor.
+		/// </summary>
 		PottoModulePoolManager();
 
+		/// <summary>
+		/// Destructor.
+		/// </summary>
 		~PottoModulePoolManager();
 
 	private:

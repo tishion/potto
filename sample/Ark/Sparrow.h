@@ -1,5 +1,5 @@
 #pragma once
-#include <potto/internal/pottoobject.h>
+#include <potto/internal/pottoobject.hpp>
 #include "include/IFlyable.h"
 
 using namespace Potto;

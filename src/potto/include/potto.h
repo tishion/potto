@@ -11,8 +11,8 @@
 #	endif // POTTO_EXPORTS
 #endif // POTTO_STATIC_LIB
 #include <string>
-#include <potto/pottoerror.h>
-#include <potto/pottouuid.h>
+#include <potto/pottoerror.hpp>
+#include <potto/pottouuid.hpp>
 
 namespace Potto
 {
