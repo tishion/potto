@@ -9,10 +9,10 @@
 
 #include <assert.h>
 #include <mutex>
-#include <potto/pottoptr.h>
-#include <potto/pottoerror.h>
-#include <potto/pottouuid.h>
-#include <potto/internal/pottodef.h>
+#include <potto/pottoptr.hpp>
+#include <potto/pottoerror.hpp>
+#include <potto/pottouuid.hpp>
+#include <potto/internal/pottodef.hpp>
 
 namespace Potto
 {	

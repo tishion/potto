@@ -2,9 +2,9 @@
 #define POTTOINTERFACE_H_
 #pragma once
 
-#include <potto/pottoerror.h>
-#include <potto/pottouuid.h>
-#include <potto/pottoconf.h>
+#include <potto/pottoconf.hpp>
+#include <potto/pottoerror.hpp>
+#include <potto/pottouuid.hpp>
 
 namespace Potto
 {

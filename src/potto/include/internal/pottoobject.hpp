@@ -7,11 +7,11 @@
 #include <cstddef>
 #include <limits>
 #include <mutex>
-#include <potto/pottoptr.h>
-#include <potto/pottoerror.h>
-#include <potto/pottointerface.h>
-#include <potto/internal/pottodef.h>
-#include <potto/internal/pottomodule.h>
+#include <potto/pottoptr.hpp>
+#include <potto/pottoerror.hpp>
+#include <potto/pottointerface.hpp>
+#include <potto/internal/pottodef.hpp>
+#include <potto/internal/pottomodule.hpp>
 
 /// <summary>
 /// The invalid offset of This pointer of interface.

@@ -5,9 +5,9 @@
 #include <atomic>
 #include <map>
 #include <memory>
-#include <potto/pottoerror.h>
-#include <potto/pottouuid.h>
-#include <potto/pottointerface.h>
+#include <potto/pottoerror.hpp>
+#include <potto/pottouuid.hpp>
+#include <potto/pottointerface.hpp>
 
 namespace Potto
 {

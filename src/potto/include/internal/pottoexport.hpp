@@ -3,10 +3,10 @@
 #pragma once
 
 #include <mutex>
-#include <potto/pottoptr.h>
-#include <potto/pottointerface.h>
-#include <potto/internal/pottodef.h>
-#include <potto/internal/pottomodule.h>
+#include <potto/pottoptr.hpp>
+#include <potto/pottointerface.hpp>
+#include <potto/internal/pottodef.hpp>
+#include <potto/internal/pottomodule.hpp>
 
 #ifdef _WIN32
 #ifdef _WIN64
