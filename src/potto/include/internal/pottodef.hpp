@@ -9,6 +9,9 @@
 #include <potto/pottouuid.hpp>
 #include <potto/pottointerface.hpp>
 
+/// <summary>
+/// The potto namespace.
+/// </summary>
 namespace Potto
 {
 	/// <summary>
@@ -24,7 +27,10 @@ namespace Potto
 	/// <summary>
 	/// The function type of creator.
 	/// </summary>
-	typedef POTTO_ERROR(*TypeObjectCreatorFunction)(const PottoUuid&, void** ppv);
+	/// <param name="id">The object id.</param>
+	/// <param name="ppv">The pointer.</param>
+	/// <returns>POTTO_E_OK if successful.</returns>
+	typedef POTTO_ERROR (*TypeObjectCreatorFunction)(const PottoUuid& id, void** ppv);
 
 	/// <summary>
 	/// The interface entry.
@@ -44,7 +50,7 @@ namespace Potto
 	};
 
 	/// <summary>
-	/// Class entry.
+	/// The class entry.
 	/// </summary>
 	class ClassEntry
 	{
@@ -100,17 +106,24 @@ namespace Potto
 	/// <summary>
 	/// The function type of ModuleCanUnloadNow
 	/// </summary>
-	typedef POTTO_ERROR(*TypeModuleCanUnloadNow)();
+	/// <returns>POTTO_E_OK if successful.</returns>
+	typedef POTTO_ERROR (*TypeModuleCanUnloadNow)();
 
 	/// <summary>
 	/// The function type of ModuleGetClassObject
 	/// </summary>
-	typedef POTTO_ERROR(*TypeModuleGetClassObject)(const PottoUuid&, const PottoUuid&, void**);
+	/// <param name="clsid">The class id.</param>
+	/// <param name="iid">The interface id.</param>
+	/// <param name="ppv">The pointer.</param>
+	/// <returns>POTTO_E_OK if successful.</returns>
+	typedef POTTO_ERROR (*TypeModuleGetClassObject)(const PottoUuid& clsid, const PottoUuid& iid, void** ppv);
 
 	/// <summary>
 	/// The function type of RegisterModule
 	/// </summary>
-	typedef POTTO_ERROR(*TypeRegisterModule)(PottoUuid&, ClassInfoList&);
+	/// <param name="id">The module id.</param>
+	/// <param name="classInfoList">The class info list.</param>
+	typedef POTTO_ERROR (*TypeRegisterModule)(PottoUuid& id, ClassInfoList& classInfoList);
 
 	/// <summary>
 	/// The class entry map.
@@ -126,7 +139,7 @@ namespace Potto
 		/// <summary>
 		/// The module handle.
 		/// </summary>
-		int							hMod;
+		void*						hMod;
 
 		/// <summary>
 		/// The module id.
@@ -164,19 +177,19 @@ namespace Potto
 /// Name and forward declaration of ModuleCanUnloadNow.
 /// </summary>
 #define ModuleCanUnloadNowName "ModuleCanUnloadNow"
-POTTO_ERROR ModuleCanUnloadNow();
+Potto::POTTO_ERROR ModuleCanUnloadNow();
 
 /// <summary>
 /// Name and forward declaration of ModuleGetClassObject.
 /// </summary>
 #define ModuleGetClassObjectName "ModuleGetClassObject"
-POTTO_ERROR ModuleGetClassObject(const Potto::PottoUuid& clsid, const Potto::PottoUuid& iid, void** ppv);
+Potto::POTTO_ERROR ModuleGetClassObject(const Potto::PottoUuid& clsid, const Potto::PottoUuid& iid, void** ppv);
 
 /// <summary>
 /// Name and forward declaration of RegisterModule.
 /// </summary>
 #define RegisterModuleName "RegisterModule"
-POTTO_ERROR RegisterModule(Potto::PottoUuid& moduleId, Potto::ClassInfoList& classInfoList);
+Potto::POTTO_ERROR RegisterModule(Potto::PottoUuid& moduleId, Potto::ClassInfoList& classInfoList);
 
 /// <summary>
 /// Potto assert.

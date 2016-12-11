@@ -6,6 +6,9 @@
 #include <potto/pottoerror.hpp>
 #include <potto/pottouuid.hpp>
 
+/// <summary>
+/// The potto namespace.
+/// </summary>
 namespace Potto
 {
 	/// <summary>
@@ -14,7 +17,7 @@ namespace Potto
 	const char* const IID_IUnknown = "10000000-0000-0000-0000-000000000000";
 
 	/// <summary>
-	/// The Unknown interface. This is the base of all interfaces in Potto Framework.
+	/// The Unknown interface. This is the base of all interfaces in potto Framework.
 	/// </summary>
 	class POTTO_DECLARE_NOVTABLE IUnknown
 	{
@@ -41,7 +44,7 @@ namespace Potto
 	};
 
 	/// <summary>
-	/// The id of class factory interface.
+	/// The id of <see cref="IClassFactory" />.
 	/// </summary>
 	const char* const IID_IClassFactory = "10000000-0000-0000-0000-000000000001";
 

@@ -14,6 +14,9 @@
 #include <potto/pottouuid.hpp>
 #include <potto/internal/pottodef.hpp>
 
+/// <summary>
+/// The potto namespace.
+/// </summary>
 namespace Potto
 {	
 	/// <summary>

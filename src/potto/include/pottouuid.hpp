@@ -11,13 +11,16 @@
 #include <string>
 #include <cctype>
 
+/// <summary>
+/// The potto namespace.
+/// </summary>
 namespace Potto
 {
 #ifdef POTTO_USE_GUID
 	/// <summary>
 	/// The UUID class.
 	/// </summary>
-	typedef class _PottoUuid
+	class PottoUuid
 	{
 	public:
 		uint32_t Data1;
@@ -28,7 +31,7 @@ namespace Potto
 		/// <summary>
 		/// Constructs GUID from string.
 		/// </summary>
-		_PottoUuid(const char* id)
+		PottoUuid(const char* id)
 		{
 			assert(id);
 			uint32_t  d1 = 0;
@@ -64,9 +67,9 @@ namespace Potto
 		/// <summary>
 		/// 
 		/// </summary>
-		bool operator <(const _PottoUuid& rhs) const
+		bool operator <(const PottoUuid& rhs) const
 		{
-			return (memcmp(this, &rhs, sizeof(_PottoUuid)) < 0);
+			return (memcmp(this, &rhs, sizeof(PottoUuid)) < 0);
 		}
 	} PottoUuid;
 
@@ -82,7 +85,7 @@ namespace Potto
 	/// <summary>
 	/// The UUID class.
 	/// </summary>
-	typedef class _PottoUuid : public std::string
+	class PottoUuid : public std::string
 	{
 	public:
 		/// <summary>
@@ -97,10 +100,10 @@ namespace Potto
 		{
 			return *this;
 		}
-	} PottoUuid;
+	};
 
 	/// <summary>
-	/// Checks whether the two UUID is equal.
+	/// Checks whether the two UUIDs are identical.
 	/// </summary>
 	inline bool IsEqualUuid(const PottoUuid& a, const PottoUuid& b)
 	{

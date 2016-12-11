@@ -14,6 +14,9 @@
 #include <potto/pottoerror.hpp>
 #include <potto/pottouuid.hpp>
 
+/// <summary>
+/// The potto namespace.
+/// </summary>
 namespace Potto
 {
 	/// <summary>
@@ -21,7 +24,7 @@ namespace Potto
 	/// </summary>
 	/// <param name="moduleDatabase">The path of the module library.</param>
 	/// <param name="moduleRootPath">The path of the module root path.</param>
-	/// <returns>POTTO_E_OK if successfull.</returns>
+	/// <returns>POTTO_E_OK if successful.</returns>
 	POTTO_API POTTO_ERROR Initialize(
 		const std::string& moduleDatabase,
 		const std::string& mouduleRootPath);
@@ -33,7 +36,7 @@ namespace Potto
 	/// <param name="interfaceId">The interface id.</param>
 	/// <param name="ppv">The pointer to receive the interface.</param>
 	/// <param name="moduleName">Optional. The path of the module to use.</param>
-	/// <returns>POTTO_E_OK if successfull.</returns>
+	/// <returns>POTTO_E_OK if successful.</returns>
 	///	<remarks>
 	/// If the moduleName is not empty, this function will try to find the module in the 
 	/// module entry list. If the module is found the function will use the module found,

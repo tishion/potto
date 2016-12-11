@@ -4,10 +4,13 @@
 
 #include <assert.h>
 
+/// <summary>
+/// The potto namespace.
+/// </summary>
 namespace Potto
 {
 	/// <summary>
-	/// Smart pointer of Potto object.
+	/// The smart pointer of potto object.
 	/// </summary>
 	template<class T>
 	class PottoPtr

@@ -23,6 +23,9 @@
 /// </summary>
 #define PROTECT_REFCOUNT (0x0FFFFFFF / 2)
 
+/// <summary>
+/// The potto namespace.
+/// </summary>
 namespace Potto
 {
 	/// <summary>
@@ -432,7 +435,7 @@ namespace Potto
 	///////////////////////////////////////////////////////////////////////
 
 	/// <summary>
-	/// Potto object creator.
+	/// The potto object creator.
 	/// </summary>
 	template <class T>
 	class PottoObjectCreator
@@ -477,7 +480,7 @@ namespace Potto
 	};
 
 	/// <summary>
-	/// Potto class register.
+	/// The potto class register.
 	/// </summary>
 	template <class T>
 	class PottoClassRegister

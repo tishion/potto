@@ -1,43 +1,57 @@
+/**
+ * @file pottoerror.h
+ *
+ * Interfaces to Data Buffer.
+ *
+ * This header define the interfaces of general purpose dynamic data buffer that
+ * implemented by Equinox.
+ */
 #ifndef POTTOERROR_H_
 #define POTTOERROR_H_
 #pragma once
 
-/// <summary>
-/// Type of potto error code.
-/// </summary>
-typedef int POTTO_ERROR;
-
-/// <summary>
-/// Error codes.
-/// </summary>
-enum POTTOR_ERROR_CODE
+ /// <summary>
+ /// The potto namespace.
+ /// </summary>
+namespace Potto
 {
-	// Operation fails
-	POTTO_E_FAIL = 0xFFFFFFFF,
+	/// <summary>
+	/// Type of potto error code.
+	/// </summary>
+	typedef int POTTO_ERROR;
 
-	// Operation succeeds
-	POTTO_E_OK = 0,
-	
-	// Pointer is null
-	POTTO_E_POINTER,
-	
-	// Invalid arguments
-	POTTO_E_INVALIDARG,
-	
-	// Out of memory
-	POTTO_E_OUTOFMEMORY,
-	
-	// Module was not found
-	POTTO_E_MODULENOTFOUND,
-	
-	// Export function was not found
-	POTTO_E_EXPORTNOTFOUND,
-	
-	// Class was not found
-	POTTO_E_CLASSNOTAVAILABLE,
-	
-	// Interface was not found
-	POTTO_E_NOINTERFACE,
-};
+	/// <summary>
+	/// Error codes.
+	/// </summary>
+	enum POTTOR_ERROR_CODE
+	{
+		/// <summary> Operation fails. </summary>
+		POTTO_E_FAIL = 0xFFFFFFFF,
+
+		/// <summary>Operation succeeds.</summary>
+		POTTO_E_OK = 0,
+
+		/// <summary>Pointer is null.</summary>
+		POTTO_E_POINTER,
+
+		/// <summary>Invalid arguments.</summary>
+		POTTO_E_INVALIDARG,
+
+		/// <summary>Out of memory.</summary>
+		POTTO_E_OUTOFMEMORY,
+
+		/// <summary>Module was not found.</summary>
+		POTTO_E_MODULENOTFOUND,
+
+		/// <summary>Export function was not found.</summary>
+		POTTO_E_EXPORTNOTFOUND,
+
+		/// <summary>Class was not found.</summary>
+		POTTO_E_CLASSNOTAVAILABLE,
+
+		/// <summary>Interface was not found.</summary>
+		POTTO_E_NOINTERFACE,
+	};
+}
 
 #endif // POTTOERROR_H_

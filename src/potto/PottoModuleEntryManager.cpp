@@ -52,7 +52,7 @@ namespace Potto
 
 		// Build Module Entry
 		ModuleEntryPtr pNewModule = std::make_shared<ModuleEntry>();
-		pNewModule->hMod = (int)hMod;
+		pNewModule->hMod = hMod;
 		pNewModule->pfnModuleGetClassObject = pfnModuleGetClassObject;
 		pNewModule->pfnModuleCanUnloadNow = pfnModuleCanUnloadNow;
 		pNewModule->pfnRegisterModule = pfnRegisterModule;
