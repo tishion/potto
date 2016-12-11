@@ -65,37 +65,37 @@ namespace Potto
 
 	private:
 		/// <summary>
-		/// 
+		/// The mutex for loading module.
 		/// </summary>
 		std::mutex m_mtxForLoadModule;
 
 		/// <summary>
-		/// 
+		/// Class lookup map.
 		/// </summary>
 		typedef std::map<const PottoUuid, ModuleEntryWeakPtr> ClassLookupMap;
 
 		/// <summary>
-		/// 
+		/// The class lookup map.
 		/// </summary>
 		ClassLookupMap m_classLookupMap;
 		
 		/// <summary>
-		/// 
+		/// The mutex for class lookup map.
 		/// </summary>
 		mutable std::mutex m_mtxForClassLookupMap;
 
 		/// <summary>
-		/// 
+		/// The module entry list.
 		/// </summary>
 		typedef std::list<ModuleEntryPtr> ModuleEntryList;
 
 		/// <summary>
-		/// 
+		/// The module entry list.
 		/// </summary>
 		ModuleEntryList m_moduleEntryList;
 
 		/// <summary>
-		/// 
+		/// The mutex for the module entry list.
 		/// </summary>
 		std::mutex m_mtxForModuleEntryList;
 	};

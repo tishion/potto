@@ -21,18 +21,18 @@ namespace Potto
 		static PottoModulePoolManager& GetInstance();
 
 		/// <summary>
-		/// 
+		/// Initializes the module path library from file.
 		/// </summary>
-		/// <param name="libraryPath"></param>
-		/// <param name="moduleRootPath"></param>
-		/// <returns></returns>
+		/// <param name="libraryPath">The library file path.</param>
+		/// <param name="moduleRootPath">The module root path.</param>
+		/// <returns>True if successful; otherwise false.</returns>
 		bool InitFromLibraryFile(const std::string& libraryPath, const std::string& moduleRootPath);
 
 		/// <summary>
-		/// 
+		/// Gets the module path by the class id.
 		/// </summary>
-		/// <param name="id"></param>
-		/// <returns></returns>
+		/// <param name="id">The class id.</param>
+		/// <returns>The module path.</returns>
 		const std::string GetModulePathByClassId(const PottoUuid& id) const;
 
 	protected:
@@ -48,32 +48,32 @@ namespace Potto
 
 	private:
 		/// <summary>
-		/// 
+		/// The module root path.
 		/// </summary>
 		std::string m_moduleRootPath;
 
 		/// <summary>
-		/// 
+		/// The module path lookup map.
 		/// </summary>
 		typedef std::map<const PottoUuid, const std::string&> ModulePathLookupMap;
 
 		/// <summary>
-		/// 
+		/// The module path lookup map.
 		/// </summary>
 		ModulePathLookupMap m_modulePathLookupMap;
 
 		/// <summary>
-		/// 
+		/// The mutex for module path lookup map.
 		/// </summary>
 		mutable std::mutex m_mtxFormodulePathLookupMap;
 
 		/// <summary>
-		/// 
+		/// The module path list.
 		/// </summary>
 		typedef std::vector<std::string> PathList;
 
 		/// <summary>
-		/// 
+		/// The module path list.
 		/// </summary>
 		PathList m_modulePathList;
 	};
