@@ -29,8 +29,8 @@ bool GetModuleIdAndClassInfo(const std::string& inputModuleFile, Potto::PottoUui
 		return false;
 	}
 
-	POTTO_ERROR error = pfnRegisterModule(moduleId, classInfoList);
-	if (POTTO_E_OK != error)
+	Potto::POTTO_ERROR error = pfnRegisterModule(moduleId, classInfoList);
+	if (Potto::POTTO_E_OK != error)
 		return false;
 
 	return true;
