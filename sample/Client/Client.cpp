@@ -43,7 +43,6 @@ int main()
 				pPlayer->Play("Lost River.mp3");
 			else
 				printf("Failed to query interface of IFlyable\r\n");
-
 		}
 		else
 			printf("Failed to create instance of ILogger\r\n");
