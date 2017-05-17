@@ -14,10 +14,10 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\internal\pottodef.hpp" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\internal\pottoexport.hpp" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\internal\pottomodule.hpp" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\internal\pottoobject.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\module\pottodef.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\module\pottoexport.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\module\pottomodule.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\module\pottoobject.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\pottoconf.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\pottoerror.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\pottointerface.hpp" />

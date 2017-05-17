@@ -6,7 +6,7 @@
 #include <string>
 #include <potto/pottoerror.hpp>
 #include <potto/pottouuid.hpp>
-#include <potto/internal/pottodef.hpp>
+#include <potto/module/pottodef.hpp>
 
 namespace Potto
 {

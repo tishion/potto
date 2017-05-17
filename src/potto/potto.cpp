@@ -1,5 +1,5 @@
 #include <potto/pottoptr.hpp>
-#include <potto/internal/pottoobject.hpp>
+#include <potto/module/pottoobject.hpp>
 #include "include/potto.h"
 #include "PottoModulePoolManager.h"
 #include "PottoModuleEntryManager.h"

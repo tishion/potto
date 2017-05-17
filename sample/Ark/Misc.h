@@ -1,5 +1,5 @@
 #pragma once
-#include <potto/internal/pottoobject.hpp>
+#include <potto/module/pottoobject.hpp>
 #include "include/ILogger.h"
 #include "include/IPlayer.h"
 

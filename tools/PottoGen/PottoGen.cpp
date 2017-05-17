@@ -12,7 +12,7 @@
 #include <rapidxml/rapidxml.hpp>
 #include <rapidxml/rapidxml_print.hpp>
 #include <potto/pottouuid.hpp>
-#include <potto/internal/pottodef.hpp>
+#include <potto/module/pottodef.hpp>
 
 
 bool GetModuleIdAndClassInfo(const std::string& inputModuleFile, Potto::PottoUuid& moduleId, Potto::ClassInfoList& classInfoList)

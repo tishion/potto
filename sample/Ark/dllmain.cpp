@@ -1,6 +1,6 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
 #include "stdafx.h"
-#include <potto/internal/pottoexport.hpp>
+#include <potto/module/pottoexport.hpp>
 
 POTTO_MODULE("470c2187-24ad-4c0c-a388-19d85ae8b909");
 

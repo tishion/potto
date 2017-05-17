@@ -10,8 +10,8 @@
 #include <potto/pottoptr.hpp>
 #include <potto/pottoerror.hpp>
 #include <potto/pottointerface.hpp>
-#include <potto/internal/pottodef.hpp>
-#include <potto/internal/pottomodule.hpp>
+#include <potto/module/pottodef.hpp>
+#include <potto/module/pottomodule.hpp>
 
 /// <summary>
 /// The invalid offset of This pointer of interface.

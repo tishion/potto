@@ -5,8 +5,8 @@
 #include <mutex>
 #include <potto/pottoptr.hpp>
 #include <potto/pottointerface.hpp>
-#include <potto/internal/pottodef.hpp>
-#include <potto/internal/pottomodule.hpp>
+#include <potto/module/pottodef.hpp>
+#include <potto/module/pottomodule.hpp>
 
 #ifdef _WIN32
 #ifdef _WIN64

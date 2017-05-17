@@ -12,7 +12,7 @@
 #include <potto/pottoptr.hpp>
 #include <potto/pottoerror.hpp>
 #include <potto/pottouuid.hpp>
-#include <potto/internal/pottodef.hpp>
+#include <potto/module/pottodef.hpp>
 
 /// <summary>
 /// The potto namespace.
