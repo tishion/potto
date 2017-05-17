@@ -250,5 +250,7 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
-/output/Potto
-/Product/Potto-dynamic
+/output
+/Product
+/sample/include/Ark
+/sample/Potto
