@@ -11,17 +11,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\pottoptr.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\pottouuid.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\pottoconf.hpp" />
-    <ClInclude Include="F:\Projects\repository_git\Potto\src\potto\include\module\pottoexport.hpp">
-      <Filter>module</Filter>
-    </ClInclude>
-    <ClInclude Include="F:\Projects\repository_git\Potto\src\potto\include\module\pottomodule.hpp">
-      <Filter>module</Filter>
-    </ClInclude>
-    <ClInclude Include="F:\Projects\repository_git\Potto\src\potto\include\module\pottoobject.hpp">
-      <Filter>module</Filter>
-    </ClInclude>
-    <ClInclude Include="F:\Projects\repository_git\Potto\src\potto\include\module\pottodef.hpp">
-      <Filter>module</Filter>
-    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\module\pottodef.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\module\pottoexport.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\module\pottomodule.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)potto\include\module\pottoobject.hpp" />
   </ItemGroup>
 </Project>
