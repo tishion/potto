@@ -2,8 +2,8 @@
   <PropertyGroup>
 	<RuntimeLibraryShortName Condition="$(RuntimeLibrary) == 'MultiThreaded' OR $(RuntimeLibrary) == 'MultiThreadedDebug'">-mt</RuntimeLibraryShortName>
 	<RuntimeLibraryShortName Condition="$(RuntimeLibrary) == 'MultiThreadedDLL' OR $(RuntimeLibrary) == 'MultiThreadedDLLDebug'"></RuntimeLibraryShortName>
-	<PottoStaticLibraryName Condition="'$(Configuration)' == 'Debug'">libpotto-$(ShortPlatormName)$(RuntimeLibraryShortName)-d.lib</PottoStaticLibraryName>
-	<PottoStaticLibraryName Condition="'$(Configuration)' == 'Release'">libpotto-$(ShortPlatormName)$(RuntimeLibraryShortName).lib</PottoStaticLibraryName>
+	<PottoStaticLibraryName Condition="'$(Configuration)' == 'Debug'">libpotto-$(PlatformShortName)$(RuntimeLibraryShortName)-d.lib</PottoStaticLibraryName>
+	<PottoStaticLibraryName Condition="'$(Configuration)' == 'Release'">libpotto-$(PlatformShortName)$(RuntimeLibraryShortName).lib</PottoStaticLibraryName>
   </PropertyGroup>
   
   <ItemDefinitionGroup>
