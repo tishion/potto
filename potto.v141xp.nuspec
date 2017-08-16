@@ -19,7 +19,7 @@
     <projectUrl>https://github.com/tishion/Potto</projectUrl>
 
     <!-- The icon is used in Visual Studio's package manager UI -->
-    <iconUrl>http://github.com/contoso/UsefulStuff/nuget_icon.png</iconUrl>
+    <iconUrl>https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
 
     <!-- If true, this value prompts the user to accept the license when
             installing the package. -->
