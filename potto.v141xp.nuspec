@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
     <!-- The identifier that must be unique within the hosting gallery -->
-    <id>potto</id>
+    <id>potto.v141xp</id>
 
     <!-- The package version number that is used when resolving dependencies -->
     <version>0.0.0.4</version>
