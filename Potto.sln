@@ -54,6 +54,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client", "sample\Client\Cli
 		{BCCB86D4-D805-4AD2-AD14-9A9B667362B4} = {BCCB86D4-D805-4AD2-AD14-9A9B667362B4}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{ECB45DAF-7155-4D8D-B836-99EF9D968362}"
+	ProjectSection(SolutionItems) = preProject
+		potto.static.v141xp.nuspec = potto.static.v141xp.nuspec
+		targets\potto.static.v141xp.targets = targets\potto.static.v141xp.targets
+		potto.v141xp.nuspec = potto.v141xp.nuspec
+		targets\potto.v141xp.targets = targets\potto.v141xp.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\pottosrc.vcxitems*{2f19520c-cb40-42a1-9af0-3031b202a8ca}*SharedItemsImports = 4

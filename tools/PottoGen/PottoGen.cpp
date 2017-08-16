@@ -38,15 +38,15 @@ bool GetModuleIdAndClassInfo(const std::string& inputModuleFile, Potto::PottoUui
 
 void GenerateClassIdHeaderFile(const std::string& inputFile, const std::string outputFolder)
 {
-	if (inputFile.empty() || outputFolder.empty())
+	if (inputFile.empty())
 		return;
+
+	std::tr2::sys::path inputFilePath = inputFile;
+	std::string fileName = inputFilePath.filename().replace_extension("").string() + "_CLSID";
 
 	Potto::PottoUuid moduleId;
 	Potto::ClassInfoList classInfoList;
 	GetModuleIdAndClassInfo(inputFile, moduleId, classInfoList);
-
-	std::tr2::sys::path inputFilePath = inputFile;
-	std::string fileName = inputFilePath.filename().replace_extension("").string() + "_CLSID";
 
 	std::stringstream oss;
 	oss << "#ifndef " << fileName << "_H_" << std::endl;
@@ -61,7 +61,16 @@ void GenerateClassIdHeaderFile(const std::string& inputFile, const std::string o
 	oss << "#endif // " << fileName << "_H_";
 
 	fileName += ".h";
-	std::tr2::sys::path outputFilePath = inputFilePath.replace_filename(fileName);
+
+	std::tr2::sys::path outputFilePath;
+	if (outputFolder.empty())
+		outputFilePath = inputFilePath.replace_filename(fileName);
+	else
+	{
+		outputFilePath = outputFolder;
+		outputFilePath /= fileName;
+	}
+
 
 	std::cout << "+++ Output File: " << outputFilePath << std::endl;
 	std::ofstream outputFile;
@@ -74,15 +83,15 @@ void GenerateClassIdHeaderFile(const std::string& inputFile, const std::string o
 
 void GenerateModuleLibXmlFile(const std::string& inputFolder, const std::string& outputFile)
 {
-	if (inputFolder.empty() || outputFile.empty())
+	if (inputFolder.empty())
 		return;
 
-	std::string input = inputFolder;
-	auto lastChar = *(input.rbegin());
-	if (lastChar != '\\')
-		input.append("\\");
+	//std::string input = inputFolder;
+	//auto lastChar = *(input.rbegin());
+	//if (lastChar != '\\')
+	//	input.append("\\");
 
-	std::tr2::sys::path inputFolderPath = input;
+	std::tr2::sys::path inputFolderPath = inputFolder;
 
 	rapidxml::xml_document<> doc;
 
@@ -139,7 +148,16 @@ void GenerateModuleLibXmlFile(const std::string& inputFolder, const std::string&
 		}
 	}
 
-	std::ofstream of(outputFile);
+	std::tr2::sys::path outputFilePath;
+	if (outputFile.empty())
+	{
+		outputFilePath = inputFolderPath;
+		outputFilePath /= "modulelib.xml";
+	}
+	else
+		outputFilePath = outputFile;
+
+	std::ofstream of(outputFilePath);
 	of << doc;
 	of.close();
 }
@@ -152,42 +170,40 @@ void GenerateModuleLibXmlFile(const std::string& inputFolder, const std::string&
 // pg.exe -modulelib <input folder> <output file>
 int main(int argc, char *argv[])
 {
-	if (argc <= 1) return -1;
-
-	for (int i = 1; i < argc; i++)
+	if (argc > 1)
 	{
 		if (0 == _stricmp(argv[1], ARG_CLASSID))
 		{
-			if (argc == 4)
+			if (argc >= 3)
 			{
 				std::string inputFile = argv[2];
-				std::string outputFolder = argv[3];
+				std::string outputFolder;
+				if (argc >= 4) outputFolder = argv[3];
 				std::cout << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
 				std::cout << "+++                              Potto code generator                               " << std::endl;
 				GenerateClassIdHeaderFile(inputFile, outputFolder);
 				std::cout << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
 				return 0;
 			}
-			return -1;
 		}
 		else if (0 == _stricmp(argv[1], ARG_MODULELIB))
 		{
-			if (argc == 4)
+			if (argc >= 3)
 			{
 				std::string inputFolder = argv[2];
-				std::string outputFile = argv[3];
+				std::string outputFile;
+				if (argc >= 4) outputFile = argv[3];
 				std::cout << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
 				std::cout << "+++                              Potto code generator                               " << std::endl;
 				GenerateModuleLibXmlFile(inputFolder, outputFile);
 				std::cout << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
 				return 0;
 			}
-			return -1;
 		}
 		else
 			return -1;
 	}
 
-    return 0;
+	return -1;
 }
 
