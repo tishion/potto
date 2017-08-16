@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
-    <metadata>
+  <metadata>
     <!-- The identifier that must be unique within the hosting gallery -->
     <id>potto.v141xp</id>
 
@@ -44,13 +44,13 @@
          <dependency id="" version="0.0" /> 
     </dependencies>
 	-->
-    </metadata>
+  </metadata>
 
-    <!-- Contents -->
-    <files>
-		<file src="output\potto\include\**\*" target="build\native\include\" />
-		<file src="targets\potto.v141xp.targets" target="build\native\"/>
-		<file src="output\potto\tools\**\*" target="tools\" exclude="**\*.pdb" />
-		<file src="output\potto\lib\dynamic\**\*" target="lib\native\" exclude="**\*.pdb" />
-    </files>
+  <!-- Contents -->
+  <files>
+    <file src="output\potto\include\**\*" target="build\native\include\" />
+    <file src="output\potto\lib\dynamic\**\*" target="lib\native\" exclude="**\*.pdb" />
+    <file src="output\potto\tools\**\*" target="tools\" exclude="**\*.pdb" />
+    <file src="targets\potto.v141xp.targets" target="build\native\"/>
+  </files>
 </package>
