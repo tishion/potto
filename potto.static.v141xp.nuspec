@@ -5,7 +5,7 @@
     <id>potto.static.v141xp</id>
 
     <!-- The package version number that is used when resolving dependencies -->
-    <version>1.0.0.1</version>
+    <version>0.0.0.4</version>
 
     <!-- Authors contain text that appears directly on the gallery -->
     <authors>Sheen Tian</authors>
@@ -19,7 +19,7 @@
     <projectUrl>https://github.com/tishion/Potto</projectUrl>
 
     <!-- The icon is used in Visual Studio's package manager UI -->
-    <iconUrl>http://github.com/contoso/UsefulStuff/nuget_icon.png</iconUrl>
+    <iconUrl>https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
 
     <!-- If true, this value prompts the user to accept the license when
             installing the package. -->
@@ -48,9 +48,9 @@
 
     <!-- Contents -->
     <files>
-		<file src="output\potto\include\**\*" target="build\include\" />
-		<file src="output\potto\tools\pg-x86.exe" target="tools\" />
+		<file src="output\potto\include\**\*" target="build\native\include\" />
+		<file src="targets\potto.static.v141xp.targets" target="build\native\"/>
+		<file src="output\potto\tools\pg-x86.exe" target="tools\" exclude="**\*.pdb" />
 		<file src="output\potto\lib\static\**\*" target="lib\native\" exclude="**\*.pdb" />
-		<file src="targets\potto.static.targets" target="build\native\"/>
     </files>
 </package>
