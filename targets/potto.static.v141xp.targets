@@ -22,6 +22,6 @@
   </ItemDefinitionGroup>
   
   <Target Name="GenerateClsidHeaderFile" AfterTargets="AfterBuild">
-	<Exec Command="$(MSBuildThisFileDirectory)..\..\tools\pg-x86.exe -classid '$(TargetPath)' '$(ProjectDir)include'" />
+	<Exec Command="$(MSBuildThisFileDirectory)..\..\tools\pg-x86.exe -classid &quot;$(TargetPath)&quot; &quot;$(ProjectDir)include&quot;" />
   </Target>
 </Project>
