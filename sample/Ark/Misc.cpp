@@ -1,5 +1,4 @@
 #include "Misc.h"
-//#include <potto/internal/pottoexport.h>
 
 Misc::Misc()
 {

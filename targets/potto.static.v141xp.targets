@@ -1,0 +1,27 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+	<RuntimeLibraryShortName Condition="$(RuntimeLibrary) == 'MultiThreaded' OR $(RuntimeLibrary) == 'MultiThreadedDebug'">-mt</RuntimeLibraryShortName>
+	<RuntimeLibraryShortName Condition="$(RuntimeLibrary) == 'MultiThreadedDLL' OR $(RuntimeLibrary) == 'MultiThreadedDLLDebug'"></RuntimeLibraryShortName>
+	<PottoStaticLibraryName Condition="'$(Configuration)' == 'Debug'">libpotto-$(ShortPlatormName)$(RuntimeLibraryShortName)-d.lib</PottoStaticLibraryName>
+	<PottoStaticLibraryName Condition="'$(Configuration)' == 'Release'">libpotto-$(ShortPlatormName)$(RuntimeLibraryShortName).lib</PottoStaticLibraryName>
+  </PropertyGroup>
+  
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions>POTTO_STATIC_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+	  <AdditionalDependencies>$(MSBuildThisFileDirectory)..\..\lib\native\$(PottoStaticLibraryName);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  
+  <Target Name="GenerateClsidHeaderFile" AfterTargets="AfterBuild">
+	<Exec Command="$(MSBuildThisFileDirectory)..\..\tools\pg-x86.exe -classid '$(TargetPath)' '$(ProjectDir)include'" />
+  </Target>
+</Project>

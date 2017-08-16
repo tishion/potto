@@ -5,7 +5,7 @@
 /// <summary>
 ///
 /// </summary>
-POTTO_INTERFACE_BEGINE("73569a2a-dfbf-4fc6-8a12-60f992673b1c", IPlayer)
+POTTO_INTERFACE_BEGINE("{73569a2a-dfbf-4fc6-8a12-60f992673b1c}", IPlayer)
 	/// <summary>
 	/// Outputs Info message.
 	/// </summary>

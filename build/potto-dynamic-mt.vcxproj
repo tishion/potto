@@ -22,7 +22,7 @@
     <ProjectGuid>{83646190-CEFE-4ECA-9EC9-A98C739EE3E9}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>pottodynamicmt</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>7.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -73,28 +73,28 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)output\$(SolutionName)\bin\</OutDir>
+    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\dynamic\</OutDir>
     <IntDir>$(SolutionDir)output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
     <TargetName>potto-x86-mt-d</TargetName>
     <IncludePath>$(SolutionDir)output\Potto\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)output\$(SolutionName)\bin\</OutDir>
+    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\dynamic\</OutDir>
     <IntDir>$(SolutionDir)output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
     <TargetName>potto-x64-mt-d</TargetName>
     <IncludePath>$(SolutionDir)output\Potto\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)output\$(SolutionName)\bin\</OutDir>
+    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\dynamic\</OutDir>
     <IntDir>$(SolutionDir)output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
     <TargetName>potto-x86-mt</TargetName>
     <IncludePath>$(SolutionDir)output\Potto\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)output\$(SolutionName)\bin\</OutDir>
+    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\dynamic\</OutDir>
     <IntDir>$(SolutionDir)output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
     <TargetName>potto-x64-mt</TargetName>
     <IncludePath>$(SolutionDir)output\Potto\include\;$(IncludePath)</IncludePath>
@@ -112,7 +112,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ImportLibrary>$(SolutionDir)output\$(SolutionName)\lib\$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(SolutionDir)output\$(SolutionName)\lib\dynamic\$(TargetName).lib</ImportLibrary>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -136,6 +137,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ImportLibrary>$(SolutionDir)output\$(SolutionName)\lib\$(TargetName).lib</ImportLibrary>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -162,6 +164,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ImportLibrary>$(SolutionDir)output\$(SolutionName)\lib\$(TargetName).lib</ImportLibrary>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -188,6 +191,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ImportLibrary>$(SolutionDir)output\$(SolutionName)\lib\$(TargetName).lib</ImportLibrary>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
       <Command>

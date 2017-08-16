@@ -15,7 +15,7 @@
 //	 virtual void Fatal(char*) = 0;
 // };
 /// </summary>
-POTTO_INTERFACE_BEGINE("ddc8bdd3-99d6-45ff-bda8-46850e318703", ILogger)
+POTTO_INTERFACE_BEGINE("{ddc8bdd3-99d6-45ff-bda8-46850e318703}", ILogger)
 	/// <summary>
 	/// Outputs Info message.
 	/// </summary>

@@ -2,7 +2,7 @@
 #include "stdafx.h"
 #include <potto/module/pottoexport.hpp>
 
-POTTO_MODULE("470c2187-24ad-4c0c-a388-19d85ae8b909");
+POTTO_MODULE("{470c2187-24ad-4c0c-a388-19d85ae8b909}");
 
 /// <summary>
 /// 

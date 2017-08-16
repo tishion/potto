@@ -22,7 +22,7 @@
     <ProjectGuid>{BCCB86D4-D805-4AD2-AD14-9A9B667362B4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>pottostaticmt</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>7.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -72,25 +72,25 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\</OutDir>
+    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\static\</OutDir>
     <IntDir>$(SolutionDir)output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
     <TargetName>libpotto-x86-mt-d</TargetName>
     <IncludePath>$(SolutionDir)output\Potto\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\</OutDir>
+    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\static\</OutDir>
     <IntDir>$(SolutionDir)output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
     <TargetName>libpotto-x86-mt</TargetName>
     <IncludePath>$(SolutionDir)output\Potto\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\</OutDir>
+    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\static\</OutDir>
     <IntDir>$(SolutionDir)output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
     <TargetName>libpotto-x64-mt-d</TargetName>
     <IncludePath>$(SolutionDir)output\Potto\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\</OutDir>
+    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\static\</OutDir>
     <IntDir>$(SolutionDir)output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
     <TargetName>libpotto-x64-mt</TargetName>
     <IncludePath>$(SolutionDir)output\Potto\include\;$(IncludePath)</IncludePath>

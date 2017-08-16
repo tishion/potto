@@ -115,7 +115,7 @@ void GenerateModuleLibXmlFile(const std::string& inputFolder, const std::string&
 		GetModuleIdAndClassInfo(it->path().string(), moduleId, classInfoList);
 
 		rapidxml::xml_node<>* pModule = doc.allocate_node(rapidxml::node_element, "Module");
-		atrribute_value = doc.allocate_string(moduleId.c_str());
+		atrribute_value = doc.allocate_string(moduleId.ToString().c_str());
 		pModule->append_attribute(doc.allocate_attribute("id", atrribute_value));
 
 		atrribute_value = doc.allocate_string(fileName.c_str());
@@ -130,7 +130,7 @@ void GenerateModuleLibXmlFile(const std::string& inputFolder, const std::string&
 		{
 			rapidxml::xml_node<>* pClass = doc.allocate_node(rapidxml::node_element, "Class");
 
-			atrribute_value = doc.allocate_string(classInfo.Id.c_str());
+			atrribute_value = doc.allocate_string(classInfo.Id.ToString().c_str());
 			pClass->append_attribute(doc.allocate_attribute("id", atrribute_value));
 
 			atrribute_value = doc.allocate_string(classInfo.Name.c_str());

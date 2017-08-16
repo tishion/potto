@@ -12,7 +12,7 @@
 //	 virtual bool Fly(int distance) = 0;
 // };
 /// </summary>
-POTTO_INTERFACE_BEGINE("d4c5a174-763c-4e6b-83f8-73355002fb7f", IFlyable)
+POTTO_INTERFACE_BEGINE("{d4c5a174-763c-4e6b-83f8-73355002fb7f}", IFlyable)
 	/// <summary>
 	/// Outputs Info message.
 	/// </summary>

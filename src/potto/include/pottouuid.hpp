@@ -98,7 +98,10 @@ namespace Potto
 		/// </summary>
 		std::string ToString() const
 		{
-			return *this;
+			std::string s;
+			std::for_each(this->begin(), this->end(),
+				[&s](const char& c) { if ('{' != c && '}' != c) s.push_back(std::tolower(c)); });
+			return s;
 		}
 	};
 
