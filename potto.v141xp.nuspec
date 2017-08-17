@@ -49,7 +49,7 @@
   <!-- Contents -->
   <files>
     <file src="output\potto\include\**\*" target="build\native\include\" />
-    <file src="output\potto\lib\dynamic\**\*" target="lib\native\" exclude="**\*.pdb" />
+    <file src="output\potto\lib\dynamic\**\*" target="lib\native\" exclude="**\*.exp" />
     <file src="output\potto\tools\**\*" target="tools\" exclude="**\*.pdb" />
     <file src="targets\potto.v141xp.targets" target="build\native\"/>
   </files>

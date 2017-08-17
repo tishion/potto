@@ -2,8 +2,8 @@
   <PropertyGroup>
     <RuntimeLibraryShortName Condition="$(RuntimeLibrary) == 'MultiThreaded' OR $(RuntimeLibrary) == 'MultiThreadedDebug'">-mt</RuntimeLibraryShortName>
     <RuntimeLibraryShortName Condition="$(RuntimeLibrary) == 'MultiThreadedDLL' OR $(RuntimeLibrary) == 'MultiThreadedDLLDebug'"></RuntimeLibraryShortName>
-    <PottoStaticLibraryName Condition="'$(Configuration)' == 'Debug'">potto-$(PlatformShortName)$(RuntimeLibraryShortName)-d.lib</PottoStaticLibraryName>
-    <PottoStaticLibraryName Condition="'$(Configuration)' == 'Release'">potto-$(PlatformShortName)$(RuntimeLibraryShortName).lib</PottoStaticLibraryName>
+    <PottoLibraryName Condition="'$(Configuration)' == 'Debug'">potto-$(PlatformShortName)$(RuntimeLibraryShortName)-d.lib</PottoLibraryName>
+    <PottoLibraryName Condition="'$(Configuration)' == 'Release'">potto-$(PlatformShortName)$(RuntimeLibraryShortName).lib</PottoLibraryName>
     <PottoGeneratorPath Condition="'$(Configuration)' == 'Debug'">$(MSBuildThisFileDirectory)..\..\tools\pg-$(PlatformShortName)$(RuntimeLibraryShortName)-d.exe</PottoGeneratorPath>
     <PottoGeneratorPath Condition="'$(Configuration)' == 'Release'">$(MSBuildThisFileDirectory)..\..\tools\pg-$(PlatformShortName)$(RuntimeLibraryShortName).exe</PottoGeneratorPath>
     <IncludeFolder>$(ProjectDir)include</IncludeFolder>
@@ -20,11 +20,11 @@
       <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(MSBuildThisFileDirectory)..\..\lib\native\$(PottoStaticLibraryName);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(MSBuildThisFileDirectory)..\..\lib\native\$(PottoLibraryName);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
 
-  <Target Name="GenerateClsidHeaderFile" AfterTargets="AfterBuild">
+  <Target Name="GenerateClassIddHeaderFile" AfterTargets="Link" BeforeTargets="PostBuildEvent">
     <MakeDir Directories="$(IncludeFolder)"/>
     <Exec Command="&quot;$(PottoGeneratorPath)&quot; -classid &quot;$(TargetPath)&quot; &quot;$(ProjectDir)include&quot;" />
   </Target>

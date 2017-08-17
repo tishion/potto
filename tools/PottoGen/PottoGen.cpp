@@ -48,6 +48,9 @@ void GenerateClassIdHeaderFile(const std::string& inputFile, const std::string o
 	Potto::ClassInfoList classInfoList;
 	GetModuleIdAndClassInfo(inputFile, moduleId, classInfoList);
 
+	std::cout << "+++ Found " << classInfoList.size() << " class(es) in module " << moduleId.ToString()
+		<< std::endl;
+
 	std::stringstream oss;
 	oss << "#ifndef " << fileName << "_H_" << std::endl;
 	oss << "#define " << fileName << "_H_" << std::endl;
@@ -55,7 +58,7 @@ void GenerateClassIdHeaderFile(const std::string& inputFile, const std::string o
 	for (const Potto::ClassInfo& classInfo : classInfoList)
 	{
 		oss << "const char* const CLSID_" << classInfo.Name << " = " << "\"" << classInfo.Id.ToString() << "\";" << std::endl;
-		std::cout << "+++ PROCESSED: Class " << classInfo.Name << ", id = " << classInfo.Id.ToString() << std::endl;
+		std::cout << "+++   " << classInfo.Id.ToString() << " -> " << classInfo.Name << std::endl;
 	}
 	oss << std::endl;
 	oss << "#endif // " << fileName << "_H_";
@@ -71,12 +74,17 @@ void GenerateClassIdHeaderFile(const std::string& inputFile, const std::string o
 		outputFilePath /= fileName;
 	}
 
-
 	std::cout << "+++ Output File: " << outputFilePath << std::endl;
-	std::ofstream outputFile;
-	outputFile.open(outputFilePath);
-	outputFile << oss.str();
-	outputFile.close();
+	try
+	{
+		std::ofstream ofs(outputFilePath, std::ios_base::trunc);
+		ofs << oss.str();
+		ofs.close();
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << "+++ Failed to write file: " << e.what() << std::endl;
+	}
 
 	return;
 }
@@ -85,11 +93,6 @@ void GenerateModuleLibXmlFile(const std::string& inputFolder, const std::string&
 {
 	if (inputFolder.empty())
 		return;
-
-	//std::string input = inputFolder;
-	//auto lastChar = *(input.rbegin());
-	//if (lastChar != '\\')
-	//	input.append("\\");
 
 	std::tr2::sys::path inputFolderPath = inputFolder;
 
@@ -105,8 +108,6 @@ void GenerateModuleLibXmlFile(const std::string& inputFolder, const std::string&
 	rapidxml::xml_node<>* pLib = doc.allocate_node(rapidxml::node_element, "PottoModuleLib");
 	doc.append_node(pLib);
 
-	char* atrribute_value = nullptr;
-
 	for (std::tr2::sys::recursive_directory_iterator it(inputFolderPath);
 		it != std::tr2::sys::recursive_directory_iterator(); it++)
 	{
@@ -116,12 +117,22 @@ void GenerateModuleLibXmlFile(const std::string& inputFolder, const std::string&
 
 		std::string fileName = it->path().filename().string();
 
+		std::cout << "+++ Proceeding module: " << fileName << std::endl;
+
 		std::string relativePath = it->path().string();
 		relativePath.erase(relativePath.begin(), relativePath.begin() + inputFolderPath.string().size());
 
 		Potto::PottoUuid moduleId;
 		Potto::ClassInfoList classInfoList;
 		GetModuleIdAndClassInfo(it->path().string(), moduleId, classInfoList);
+
+		if (moduleId.ToString().empty())
+			continue;
+
+		std::cout << "+++   Found " << classInfoList.size() << " class(es) in module " << moduleId.ToString()
+			<< std::endl;
+		
+		char* atrribute_value = nullptr;
 
 		rapidxml::xml_node<>* pModule = doc.allocate_node(rapidxml::node_element, "Module");
 		atrribute_value = doc.allocate_string(moduleId.ToString().c_str());
@@ -145,6 +156,8 @@ void GenerateModuleLibXmlFile(const std::string& inputFolder, const std::string&
 			atrribute_value = doc.allocate_string(classInfo.Name.c_str());
 			pClass->append_attribute(doc.allocate_attribute("name", atrribute_value));
 			pModule->append_node(pClass);
+
+			std::cout << "+++       " << classInfo.Id.ToString() << " -> " << classInfo.Name << std::endl;
 		}
 	}
 
@@ -157,9 +170,19 @@ void GenerateModuleLibXmlFile(const std::string& inputFolder, const std::string&
 	else
 		outputFilePath = outputFile;
 
-	std::ofstream of(outputFilePath);
-	of << doc;
-	of.close();
+	std::cout << "+++ Output File: " << outputFilePath << std::endl;
+	try
+	{
+		std::ofstream ofs(outputFilePath, std::ios_base::trunc);
+		ofs << doc;
+		ofs.close();
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << "+++ Failed to write file: " << e.what() << std::endl;
+	}
+
+	return;
 }
 
 #define ARG_CLASSID		"-classid"

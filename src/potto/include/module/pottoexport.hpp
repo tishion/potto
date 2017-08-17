@@ -28,7 +28,7 @@ Potto::POTTO_ERROR ModuleCanUnloadNow()
 Potto::POTTO_ERROR ModuleGetClassObject(const Potto::PottoUuid& clsid, const Potto::PottoUuid& iid, void** ppv)
 {
 	auto it = Potto::PottoModule::GetInstance().GetClassEntryMap().find(clsid);
-	if (it == Potto::PottoModule::GetInstance().GetClassEntryMap().end() && nullptr != it->second)
+	if (it == Potto::PottoModule::GetInstance().GetClassEntryMap().end() || nullptr == it->second)
 		return Potto::POTTO_E_CLASSNOTAVAILABLE;
 
 	Potto::ClassEntry* pEntry = it->second;

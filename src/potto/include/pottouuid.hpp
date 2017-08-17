@@ -103,6 +103,19 @@ namespace Potto
 				[&s](const char& c) { if ('{' != c && '}' != c) s.push_back(std::tolower(c)); });
 			return s;
 		}
+
+		bool operator<(const PottoUuid& id) const
+		{
+			std::string self;
+			std::for_each(this->begin(), this->end(),
+				[&self](const char& c) { if ('{' != c && '}' != c) self.push_back(std::tolower(c)); });
+
+			std::string other;
+			std::for_each(id.begin(), id.end(),
+				[&other](const char& c) { if ('{' != c && '}' != c) other.push_back(std::tolower(c)); });
+
+			return self < other;
+		}
 	};
 
 	/// <summary>
