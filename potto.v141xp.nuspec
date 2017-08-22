@@ -30,13 +30,13 @@
 
     <!-- The description can be used in package manager UI. Note that the
             nuget.org gallery uses information you add in the portal. -->
-    <description>Lightweith implementation of Component Model Framework</description>
+    <description>Lightweight C++ implementation of Component Object Model Framework</description>
 
     <!-- Copyright information -->
     <copyright>Copyright © 2017 Sheen Tian</copyright>
 
     <!-- Tags appear in the gallery and can be used for tag searches -->
-    <tags>Component Model Framework</tags>
+    <tags>Component Object Model Framework</tags>
 
     <!-- Dependencies are automatically installed when the package is installed -->
     <!--
