@@ -19,33 +19,33 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{83646190-CEFE-4ECA-9EC9-A98C739EE3E9}</ProjectGuid>
+    <ProjectGuid>{847F0E06-3073-45E6-B0A3-5F8DD5B62A7C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>pottodynamicmt</RootNamespace>
-    <WindowsTargetPlatformVersion>7.0</WindowsTargetPlatformVersion>
+    <RootNamespace>Client-dynamic</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141_xp</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141_xp</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141_xp</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141_xp</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -55,8 +55,6 @@
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Label="Shared">
-    <Import Project="..\src\pottosrc.vcxitems" Label="Shared" />
-    <Import Project="..\thirdparty\rapidxml.vcxitems" Label="Shared" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -72,135 +70,136 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\dynamic\</OutDir>
-    <IntDir>$(SolutionDir)output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-    <TargetName>potto-x86-mt-d</TargetName>
-    <IncludePath>$(SolutionDir)output\Potto\include\;$(IncludePath)</IncludePath>
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)sample\output\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)sample\output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IncludePath>$(SolutionDir)sample\include\;$(SolutionDir)sample\Potto\include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)sample\Potto\lib\$(PlatformToolset)\dynamic\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\dynamic\</OutDir>
-    <IntDir>$(SolutionDir)output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-    <TargetName>potto-x64-mt-d</TargetName>
-    <IncludePath>$(SolutionDir)output\Potto\include\;$(IncludePath)</IncludePath>
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)sample\output\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)sample\output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IncludePath>$(SolutionDir)sample\include\;$(SolutionDir)sample\Potto\include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)sample\Potto\lib\$(PlatformToolset)\dynamic\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\dynamic\</OutDir>
-    <IntDir>$(SolutionDir)output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-    <TargetName>potto-x86-mt</TargetName>
-    <IncludePath>$(SolutionDir)output\Potto\include\;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)sample\output\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)sample\output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IncludePath>$(SolutionDir)sample\include\;$(SolutionDir)sample\Potto\include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)sample\Potto\lib\$(PlatformToolset)\dynamic\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\dynamic\</OutDir>
-    <IntDir>$(SolutionDir)output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-    <TargetName>potto-x64-mt</TargetName>
-    <IncludePath>$(SolutionDir)output\Potto\include\;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)sample\output\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)sample\output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IncludePath>$(SolutionDir)sample\include\;$(SolutionDir)sample\Potto\include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)sample\Potto\lib\$(PlatformToolset)\dynamic\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>POTTO_EXPORTS;WIN32;_DEBUG;_WINDOWS;_USRDLL;POTTODYNAMIC_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ImportLibrary>$(SolutionDir)output\$(SolutionName)\lib\dynamic\$(TargetName).lib</ImportLibrary>
+      <AdditionalDependencies>potto-$(PlatformShortName)-d.lib</AdditionalDependencies>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
-    <PostBuildEvent>
-      <Command>
-      </Command>
-    </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy /e /s /y "$(SolutionDir)src\potto\include\*" "$(SolutionDir)output\$(SolutionName)\include\potto\*"</Command>
+      <Command>$(SolutionDir)sample\Potto\tools\$(PlatformToolset)\pg-$(PlatformShortName)-d.exe -modulelib $(OutDir) $(OutDir)\modulelib.xml</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy /e /s /y "$(SolutionDir)sample\potto\lib\$(PlatformToolset)\dynamic\potto-$(PlatformShortName)-d.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>POTTO_EXPORTS;_DEBUG;_WINDOWS;_USRDLL;POTTODYNAMIC_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ImportLibrary>$(SolutionDir)output\$(SolutionName)\lib\dynamic\$(TargetName).lib</ImportLibrary>
+      <AdditionalDependencies>potto-$(PlatformShortName)-d.lib</AdditionalDependencies>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
-    <PostBuildEvent>
-      <Command>
-      </Command>
-    </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy /e /s /y "$(SolutionDir)src\potto\include\*" "$(SolutionDir)output\$(SolutionName)\include\potto\*"</Command>
+      <Command>$(SolutionDir)sample\Potto\tools\$(PlatformToolset)\pg-$(PlatformShortName)-d.exe -modulelib $(OutDir) $(OutDir)\modulelib.xml</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy /e /s /y "$(SolutionDir)sample\potto\lib\$(PlatformToolset)\dynamic\potto-$(PlatformShortName)-d.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>POTTO_EXPORTS;WIN32;NDEBUG;_WINDOWS;_USRDLL;POTTODYNAMIC_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ImportLibrary>$(SolutionDir)output\$(SolutionName)\lib\dynamic\$(TargetName).lib</ImportLibrary>
+      <AdditionalDependencies>potto-$(PlatformShortName).lib</AdditionalDependencies>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
-    <PostBuildEvent>
-      <Command>
-      </Command>
-    </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy /e /s /y "$(SolutionDir)src\potto\include\*" "$(SolutionDir)output\$(SolutionName)\include\potto\*"</Command>
+      <Command>$(SolutionDir)sample\Potto\tools\$(PlatformToolset)\pg-$(PlatformShortName).exe -modulelib $(OutDir) $(OutDir)\modulelib.xml</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy /e /s /y "$(SolutionDir)sample\potto\lib\$(PlatformToolset)\dynamic\potto-$(PlatformShortName).dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>POTTO_EXPORTS;NDEBUG;_WINDOWS;_USRDLL;POTTODYNAMIC_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ImportLibrary>$(SolutionDir)output\$(SolutionName)\lib\dynamic\$(TargetName).lib</ImportLibrary>
+      <AdditionalDependencies>potto-$(PlatformShortName).lib</AdditionalDependencies>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
-    <PostBuildEvent>
-      <Command>
-      </Command>
-    </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy /e /s /y "$(SolutionDir)src\potto\include\*" "$(SolutionDir)output\$(SolutionName)\include\potto\*"</Command>
+      <Command>$(SolutionDir)sample\Potto\tools\$(PlatformToolset)\pg-$(PlatformShortName).exe -modulelib $(OutDir) $(OutDir)\modulelib.xml</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy /e /s /y "$(SolutionDir)sample\potto\lib\$(PlatformToolset)\dynamic\potto-$(PlatformShortName).dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Client.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

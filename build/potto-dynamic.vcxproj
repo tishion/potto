@@ -73,30 +73,30 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\dynamic\</OutDir>
+    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\$(PlatformToolset)\dynamic\</OutDir>
     <IntDir>$(SolutionDir)output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-    <TargetName>potto-x86-d</TargetName>
+    <TargetName>potto-$(PlatformShortName)-d</TargetName>
     <IncludePath>$(SolutionDir)output\Potto\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\dynamic\</OutDir>
+    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\$(PlatformToolset)\dynamic\</OutDir>
     <IntDir>$(SolutionDir)output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-    <TargetName>potto-x64-d</TargetName>
+    <TargetName>potto-$(PlatformShortName)-d</TargetName>
     <IncludePath>$(SolutionDir)output\Potto\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\dynamic\</OutDir>
+    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\$(PlatformToolset)\dynamic\</OutDir>
     <IntDir>$(SolutionDir)output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-    <TargetName>potto-x86</TargetName>
+    <TargetName>potto-$(PlatformShortName)</TargetName>
     <IncludePath>$(SolutionDir)output\Potto\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\dynamic\</OutDir>
+    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\$(PlatformToolset)\dynamic\</OutDir>
     <IntDir>$(SolutionDir)output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-    <TargetName>potto-x64</TargetName>
+    <TargetName>potto-$(PlatformShortName)</TargetName>
     <IncludePath>$(SolutionDir)output\Potto\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -111,7 +111,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ImportLibrary>$(SolutionDir)output\$(SolutionName)\lib\dynamic\$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(TargetDir)$(TargetName).lib</ImportLibrary>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
@@ -134,7 +134,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ImportLibrary>$(SolutionDir)output\$(SolutionName)\lib\dynamic\$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(TargetDir)$(TargetName).lib</ImportLibrary>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
@@ -160,7 +160,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ImportLibrary>$(SolutionDir)output\$(SolutionName)\lib\dynamic\$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(TargetDir)$(TargetName).lib</ImportLibrary>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
@@ -186,7 +186,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ImportLibrary>$(SolutionDir)output\$(SolutionName)\lib\dynamic\$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(TargetDir)$(TargetName).lib</ImportLibrary>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>

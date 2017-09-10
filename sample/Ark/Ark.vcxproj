@@ -109,7 +109,7 @@
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>$(SolutionDir)sample\Potto\tools\$(Configuration)\$(Platform)\pg-x86-d.exe  -classid "$(TargetPath)" "$(ProjectDir)include"
+      <Command>$(SolutionDir)sample\Potto\tools\$(PlatformToolset)\pg-$(PlatformShortName)-d.exe  -classid "$(TargetPath)" "$(ProjectDir)include"
 xcopy /e /s /y "$(ProjectDir)include\*" "$(SolutionDir)sample\include\$(ProjectName)\*"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
@@ -132,7 +132,7 @@ xcopy /e /s /y "$(ProjectDir)include\*" "$(SolutionDir)sample\include\$(ProjectN
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>$(SolutionDir)sample\Potto\tools\$(Configuration)\$(Platform)\pg-x64-d.exe  -classid "$(TargetPath)" "$(ProjectDir)include"
+      <Command>$(SolutionDir)sample\Potto\tools\$(PlatformToolset)\pg-$(PlatformShortName)-d.exe  -classid "$(TargetPath)" "$(ProjectDir)include"
 xcopy /e /s /y "$(ProjectDir)include\*" "$(SolutionDir)sample\include\$(ProjectName)\*"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
@@ -159,7 +159,7 @@ xcopy /e /s /y "$(ProjectDir)include\*" "$(SolutionDir)sample\include\$(ProjectN
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>$(SolutionDir)sample\Potto\tools\$(Configuration)\$(Platform)\pg-x86.exe  -classid "$(TargetPath)" "$(ProjectDir)include"
+      <Command>$(SolutionDir)sample\Potto\tools\$(PlatformToolset)\pg-$(PlatformShortName).exe  -classid "$(TargetPath)" "$(ProjectDir)include"
 xcopy /e /s /y "$(ProjectDir)include\*" "$(SolutionDir)sample\include\$(ProjectName)\*"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
@@ -186,7 +186,7 @@ xcopy /e /s /y "$(ProjectDir)include\*" "$(SolutionDir)sample\include\$(ProjectN
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>$(SolutionDir)sample\Potto\tools\$(Configuration)\$(Platform)\pg-x64.exe  -classid "$(TargetPath)" "$(ProjectDir)include"
+      <Command>$(SolutionDir)sample\Potto\tools\$(PlatformToolset)\pg-$(PlatformShortName).exe  -classid "$(TargetPath)" "$(ProjectDir)include"
 xcopy /e /s /y "$(ProjectDir)include\*" "$(SolutionDir)sample\include\$(ProjectName)\*"</Command>
     </PostBuildEvent>
     <PreBuildEvent>

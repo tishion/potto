@@ -19,33 +19,33 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{2F19520C-CB40-42A1-9AF0-3031B202A8CA}</ProjectGuid>
+    <ProjectGuid>{07B95676-3050-42ED-A703-C4BBAE3EB52D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>pottostatic</RootNamespace>
-    <WindowsTargetPlatformVersion>7.0</WindowsTargetPlatformVersion>
+    <RootNamespace>Ark-dynamic</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141_xp</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141_xp</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141_xp</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141_xp</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -55,8 +55,6 @@
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Label="Shared">
-    <Import Project="..\src\pottosrc.vcxitems" Label="Shared" />
-    <Import Project="..\thirdparty\rapidxml.vcxitems" Label="Shared" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -72,28 +70,28 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\$(PlatformToolset)\static\</OutDir>
-    <IntDir>$(SolutionDir)output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-    <TargetName>libpotto-$(PlatformShortName)-d</TargetName>
-    <IncludePath>$(SolutionDir)output\Potto\include\;$(IncludePath)</IncludePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\$(PlatformToolset)\static\</OutDir>
-    <IntDir>$(SolutionDir)output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-    <TargetName>libpotto-$(PlatformShortName)</TargetName>
-    <IncludePath>$(SolutionDir)output\Potto\include\;$(IncludePath)</IncludePath>
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)sample\output\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)sample\output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IncludePath>$(SolutionDir)sample\Potto\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\$(PlatformToolset)\static\</OutDir>
-    <IntDir>$(SolutionDir)output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-    <TargetName>libpotto-$(PlatformShortName)-d</TargetName>
-    <IncludePath>$(SolutionDir)output\Potto\include\;$(IncludePath)</IncludePath>
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)sample\output\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)sample\output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IncludePath>$(SolutionDir)sample\Potto\include\;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)sample\output\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)sample\output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IncludePath>$(SolutionDir)sample\Potto\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)output\$(SolutionName)\lib\$(PlatformToolset)\static\</OutDir>
-    <IntDir>$(SolutionDir)output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-    <TargetName>libpotto-$(PlatformShortName)</TargetName>
-    <IncludePath>$(SolutionDir)output\Potto\include\;$(IncludePath)</IncludePath>
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)sample\output\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)sample\output\temp\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IncludePath>$(SolutionDir)sample\Potto\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -101,18 +99,21 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>POTTO_STATIC_LIB;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ARK_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapExports>true</MapExports>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>$(SolutionDir)sample\Potto\tools\$(PlatformToolset)\pg-$(PlatformShortName)-d.exe  -classid "$(TargetPath)" "$(ProjectDir)include" "Ark_CLSID.h"
+xcopy /e /s /y "$(ProjectDir)include\*" "$(SolutionDir)sample\include\Ark\*"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy /e /s /y "$(SolutionDir)src\potto\include\*" "$(SolutionDir)output\$(SolutionName)\include\potto\*"</Command>
+      <Command>xcopy /e /s /y "$(SolutionDir)output\Potto" "$(SolutionDir)sample\Potto\*"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -121,18 +122,21 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>POTTO_STATIC_LIB;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;ARK_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapExports>true</MapExports>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>$(SolutionDir)sample\Potto\tools\$(PlatformToolset)\pg-$(PlatformShortName)-d.exe  -classid "$(TargetPath)" "$(ProjectDir)include" "Ark_CLSID.h"
+xcopy /e /s /y "$(ProjectDir)include\*" "$(SolutionDir)sample\include\Ark\*"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy /e /s /y "$(SolutionDir)src\potto\include\*" "$(SolutionDir)output\$(SolutionName)\include\potto\*"</Command>
+      <Command>xcopy /e /s /y "$(SolutionDir)output\Potto" "$(SolutionDir)sample\Potto\*"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -143,20 +147,23 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>POTTO_STATIC_LIB;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;ARK_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapExports>true</MapExports>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>$(SolutionDir)sample\Potto\tools\$(PlatformToolset)\pg-$(PlatformShortName).exe  -classid "$(TargetPath)" "$(ProjectDir)include" "Ark_CLSID.h"
+xcopy /e /s /y "$(ProjectDir)include\*" "$(SolutionDir)sample\include\Ark\*"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy /e /s /y "$(SolutionDir)src\potto\include\*" "$(SolutionDir)output\$(SolutionName)\include\potto\*"</Command>
+      <Command>xcopy /e /s /y "$(SolutionDir)output\Potto" "$(SolutionDir)sample\Potto\*"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -167,22 +174,53 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>POTTO_STATIC_LIB;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;ARK_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapExports>true</MapExports>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>$(SolutionDir)sample\Potto\tools\$(PlatformToolset)\pg-$(PlatformShortName).exe  -classid "$(TargetPath)" "$(ProjectDir)include" "Ark_CLSID.h"
+xcopy /e /s /y "$(ProjectDir)include\*" "$(SolutionDir)sample\include\Ark\*"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy /e /s /y "$(SolutionDir)src\potto\include\*" "$(SolutionDir)output\$(SolutionName)\include\potto\*"</Command>
+      <Command>xcopy /e /s /y "$(SolutionDir)output\Potto" "$(SolutionDir)sample\Potto\*"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="include\IFlyable.h" />
+    <ClInclude Include="include\ILogger.h" />
+    <ClInclude Include="include\IPlayer.h" />
+    <ClInclude Include="Misc.h" />
+    <ClInclude Include="Sparrow.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Misc.cpp" />
+    <ClCompile Include="Sparrow.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

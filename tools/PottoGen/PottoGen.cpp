@@ -36,13 +36,13 @@ bool GetModuleIdAndClassInfo(const std::string& inputModuleFile, Potto::PottoUui
 	return true;
 }
 
-void GenerateClassIdHeaderFile(const std::string& inputFile, const std::string outputFolder)
+void GenerateClassIdHeaderFile(const std::string& inputFile, const std::string outputFolder, const std::string outputFileName)
 {
 	if (inputFile.empty())
 		return;
 
 	std::tr2::sys::path inputFilePath = inputFile;
-	std::string fileName = inputFilePath.filename().replace_extension("").string() + "_CLSID";
+	std::string fileName = outputFileName.empty() ? inputFilePath.filename().replace_extension("").string() + "_CLSID.h" : outputFileName;
 
 	Potto::PottoUuid moduleId;
 	Potto::ClassInfoList classInfoList;
@@ -51,9 +51,16 @@ void GenerateClassIdHeaderFile(const std::string& inputFile, const std::string o
 	std::cout << "+++ Found " << classInfoList.size() << " class(es) in module " << moduleId.ToString()
 		<< std::endl;
 
+	std::string headerMacroName;
+	std::string headerMacro = std::string("POTTO_MODULE_") + moduleId.ToString() + "_H_";
+	std::for_each(headerMacro.begin(), headerMacro.end(), [&headerMacroName](const char& c)
+	{
+		headerMacroName.push_back('-' == c ? '_' : std::toupper(c));
+	});
+
 	std::stringstream oss;
-	oss << "#ifndef " << fileName << "_H_" << std::endl;
-	oss << "#define " << fileName << "_H_" << std::endl;
+	oss << "#ifndef " << headerMacroName << std::endl;
+	oss << "#define " << headerMacroName << std::endl;
 	oss << "#pragma once" << std::endl;
 	for (const Potto::ClassInfo& classInfo : classInfoList)
 	{
@@ -61,9 +68,7 @@ void GenerateClassIdHeaderFile(const std::string& inputFile, const std::string o
 		std::cout << "+++   " << classInfo.Id.ToString() << " -> " << classInfo.Name << std::endl;
 	}
 	oss << std::endl;
-	oss << "#endif // " << fileName << "_H_";
-
-	fileName += ".h";
+	oss << "#endif // " << headerMacroName;
 
 	std::tr2::sys::path outputFilePath;
 	if (outputFolder.empty())
@@ -189,7 +194,7 @@ void GenerateModuleLibXmlFile(const std::string& inputFolder, const std::string&
 #define ARG_MODULELIB	"-modulelib"
 #define ARG_ROOT		"-root"
 
-// pg.exe -classid <input file> <output folder>
+// pg.exe -classid {input file} {output folder} [output file name] 
 // pg.exe -modulelib <input folder> <output file>
 int main(int argc, char *argv[])
 {
@@ -201,10 +206,12 @@ int main(int argc, char *argv[])
 			{
 				std::string inputFile = argv[2];
 				std::string outputFolder;
+				std::string outputFileName;
 				if (argc >= 4) outputFolder = argv[3];
+				if (argc >= 5) outputFileName = argv[4];
 				std::cout << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
 				std::cout << "+++                              Potto code generator                               " << std::endl;
-				GenerateClassIdHeaderFile(inputFile, outputFolder);
+				GenerateClassIdHeaderFile(inputFile, outputFolder, outputFileName);
 				std::cout << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
 				return 0;
 			}
