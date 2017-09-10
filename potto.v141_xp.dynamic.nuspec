@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <!-- The identifier that must be unique within the hosting gallery -->
-    <id>potto.static.v141xp</id>
+    <id>potto.v141_xp.dynamic</id>
 
     <!-- The package version number that is used when resolving dependencies -->
     <version>0.0.0.4</version>
@@ -36,7 +36,7 @@
     <copyright>Copyright © 2017 Sheen Tian</copyright>
 
     <!-- Tags appear in the gallery and can be used for tag searches -->
-    <tags>Component Obhect Model Framework</tags>
+    <tags>Component Object Model Framework</tags>
 
     <!-- Dependencies are automatically installed when the package is installed -->
     <!--
@@ -49,8 +49,8 @@
   <!-- Contents -->
   <files>
     <file src="output\potto\include\**\*" target="build\native\include\" />
-    <file src="output\potto\lib\static\**\*" target="lib\native\" />
-    <file src="output\potto\tools\**\*" target="tools\" exclude="**\*.pdb" />
-    <file src="targets\potto.static.v141xp.targets" target="build\native\"/>
+    <file src="output\potto\lib\v141_xp\dynamic\**\*" target="lib\native\" exclude="**\*.exp" />
+    <file src="output\potto\tools\v141_xp\**\*" target="tools\" exclude="**\*.pdb" />
+    <file src="targets\potto.v141_xp.dynamic.targets" target="build\native\"/>
   </files>
 </package>

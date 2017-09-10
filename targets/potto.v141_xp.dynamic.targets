@@ -1,0 +1,38 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!--Library name-->
+    <PottoLibraryName Condition="'$(Configuration)' == 'Debug'">potto-$(PlatformShortName)-d.lib</PottoLibraryName>
+    <PottoLibraryName Condition="'$(Configuration)' == 'Release'">potto-$(PlatformShortName).lib</PottoLibraryName>
+    <!--Potto code gnerator path-->  
+    <PottoGeneratorPath Condition="'$(Configuration)' == 'Debug'">$(MSBuildThisFileDirectory)..\..\tools\pg-$(PlatformShortName)-d.exe</PottoGeneratorPath>
+    <PottoGeneratorPath Condition="'$(Configuration)' == 'Release'">$(MSBuildThisFileDirectory)..\..\tools\pg-$(PlatformShortName).exe</PottoGeneratorPath>
+    <!--Include folder-->
+    <IncludeFolder>$(ProjectDir)include</IncludeFolder>
+  </PropertyGroup>
+  
+  <ItemDefinitionGroup>
+    <!--Header files folder-->
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <!--Import librrary-->
+    <Link>
+      <AdditionalDependencies>$(MSBuildThisFileDirectory)..\..\lib\native\$(PottoLibraryName);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <!--Check the runtime library-->
+  <Target Name="RuntimeLibraryCheck" BeforeTargets="Compile">
+    <Error Text="Multi threaded runtime library is not supported by Potto." Condition="$(RuntimeLibrary) == 'MultiThreaded' OR $(RuntimeLibrary) == 'MultiThreadedDebug'" />
+  </Target>
+
+  <!--Run Potto code generator-->
+  <Target Name="GenerateClassIddHeaderFile" AfterTargets="Link" BeforeTargets="PostBuildEvent">
+    <!--Ensure the existence of include folder-->
+    <MakeDir Directories="$(IncludeFolder)"/>
+    <!--Copy the header-->
+    <Exec Command="&quot;$(PottoGeneratorPath)&quot; -classid &quot;$(TargetPath)&quot; &quot;$(ProjectDir)include&quot;" />
+    <!--Copy the dll file-->
+    <Exec Command="xcopy /e /s /y &quot;$(MSBuildThisFileDirectory)..\..\lib\native\$(PottoLibraryName)&quot; &quot;$(TargetDir)&quot;" />
+  </Target>
+</Project>
