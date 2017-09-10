@@ -28,12 +28,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{85EB21BD-489F-4844-B937-FF38850EB011}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "package", "package", "{ECB45DAF-7155-4D8D-B836-99EF9D968362}"
-	ProjectSection(SolutionItems) = preProject
-		potto.static.v141xp.nuspec = potto.static.v141xp.nuspec
-		targets\potto.static.v141xp.targets = targets\potto.static.v141xp.targets
-		potto.v141xp.nuspec = potto.v141xp.nuspec
-		targets\potto.v141xp.targets = targets\potto.v141xp.targets
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ark-dynamic", "sample\Ark\Ark-dynamic.vcxproj", "{07B95676-3050-42ED-A703-C4BBAE3EB52D}"
 EndProject
@@ -42,6 +36,22 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client-dynamic", "sample\Client\Client-dynamic.vcxproj", "{847F0E06-3073-45E6-B0A3-5F8DD5B62A7C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client-static", "sample\Client\Client-static.vcxproj", "{94EEA143-2948-4C91-8F81-9099B247580D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "v141_xp", "v141_xp", "{7CEBB42B-45E5-4C93-8F67-ADDDB3B5CADE}"
+	ProjectSection(SolutionItems) = preProject
+		nuget\potto.v141_xp.dynamic.nuspec = nuget\potto.v141_xp.dynamic.nuspec
+		targets\potto.v141_xp.dynamic.targets = targets\potto.v141_xp.dynamic.targets
+		nuget\potto.v141_xp.static.nuspec = nuget\potto.v141_xp.static.nuspec
+		targets\potto.v141_xp.static.targets = targets\potto.v141_xp.static.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "v141", "v141", "{EE22F64F-AA31-4496-BE4C-08A51EABCBD7}"
+	ProjectSection(SolutionItems) = preProject
+		nuget\potto.v141.dynamic.nuspec = nuget\potto.v141.dynamic.nuspec
+		targets\potto.v141.dynamic.targets = targets\potto.v141.dynamic.targets
+		nuget\potto.v141.static.nuspec = nuget\potto.v141.static.nuspec
+		targets\potto.v141.static.targets = targets\potto.v141.static.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -136,6 +146,8 @@ Global
 		{F75A888E-7154-4A1E-83A3-F771EC91CB97} = {85EB21BD-489F-4844-B937-FF38850EB011}
 		{847F0E06-3073-45E6-B0A3-5F8DD5B62A7C} = {85EB21BD-489F-4844-B937-FF38850EB011}
 		{94EEA143-2948-4C91-8F81-9099B247580D} = {85EB21BD-489F-4844-B937-FF38850EB011}
+		{7CEBB42B-45E5-4C93-8F67-ADDDB3B5CADE} = {ECB45DAF-7155-4D8D-B836-99EF9D968362}
+		{EE22F64F-AA31-4496-BE4C-08A51EABCBD7} = {ECB45DAF-7155-4D8D-B836-99EF9D968362}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {322D3BAD-BFD6-465F-8DFB-E569D4CC65D5}

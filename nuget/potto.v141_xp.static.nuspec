@@ -48,9 +48,9 @@
 
   <!-- Contents -->
   <files>
-    <file src="output\potto\include\**\*" target="build\native\include\" />
-    <file src="output\potto\lib\v141_xp\static\**\*" target="lib\native\" />
-    <file src="output\potto\tools\v141_xp\**\*" target="tools\" exclude="**\*.pdb" />
-    <file src="targets\potto.v141_xp.static.targets" target="build\native\"/>
+    <file src="..\output\potto\include\**\*" target="build\native\include\" />
+    <file src="..\output\potto\lib\v141_xp\static\**\*" target="lib\native\" />
+    <file src="..\output\potto\tools\v141_xp\**\*" target="tools\" exclude="**\*.pdb" />
+    <file src="..\targets\potto.v141_xp.static.targets" target="build\native\"/>
   </files>
 </package>
