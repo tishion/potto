@@ -93,10 +93,7 @@ namespace Potto
 			if (modulePath.at(0) == '\\')
 				modulePath.erase(modulePath.begin());
 
-			// Insert path into list
-			m_modulePathList.push_back(modulePath);
-			size_t index = m_modulePathList.size() - 1;
-
+			std::shared_ptr<std::string> pModulePath = std::make_shared<std::string>(modulePath);
 			// Build lookup map for the classes in this module
 			for (auto pClass = pModule->first_node("Class");
 				nullptr != pClass; pClass = pClass->next_sibling())
@@ -113,7 +110,7 @@ namespace Potto
 				}
 
 				m_modulePathLookupMap.insert(
-					std::pair<const PottoUuid, const std::string&>(classId, m_modulePathList[index]));
+					std::pair<const PottoUuid, std::shared_ptr<std::string>>(classId, pModulePath));
 			}
 		}
 
@@ -133,7 +130,7 @@ namespace Potto
 		// If the module was found then build and return the full path
 		if (it != m_modulePathLookupMap.end())
 		{
-			std::string modulePath = m_moduleRootPath + it->second;
+			std::string modulePath = m_moduleRootPath + *(it->second);
 			return modulePath;
 		}
 		
@@ -153,8 +150,5 @@ namespace Potto
 			std::lock_guard<std::mutex> lock(m_mtxFormodulePathLookupMap);
 			m_modulePathLookupMap.clear();
 		}
-
-		// Clean the module path list
-		m_modulePathList.clear();
 	}
 }

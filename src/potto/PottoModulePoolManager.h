@@ -2,6 +2,7 @@
 #define POTTO_MODULE_POOL_NAMANGER_H_
 #pragma once
 #include <map>
+#include <memory>
 #include <mutex>
 #include <string>
 #include <potto/pottouuid.hpp>
@@ -55,7 +56,7 @@ namespace Potto
 		/// <summary>
 		/// The module path lookup map.
 		/// </summary>
-		typedef std::map<const PottoUuid, const std::string&> ModulePathLookupMap;
+		typedef std::map<const PottoUuid, std::shared_ptr<std::string>> ModulePathLookupMap;
 
 		/// <summary>
 		/// The module path lookup map.
@@ -66,16 +67,6 @@ namespace Potto
 		/// The mutex for module path lookup map.
 		/// </summary>
 		mutable std::mutex m_mtxFormodulePathLookupMap;
-
-		/// <summary>
-		/// The module path list.
-		/// </summary>
-		typedef std::vector<std::string> PathList;
-
-		/// <summary>
-		/// The module path list.
-		/// </summary>
-		PathList m_modulePathList;
 	};
 }
 
