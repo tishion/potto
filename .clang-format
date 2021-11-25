@@ -1,0 +1,17 @@
+---
+BasedOnStyle: LLVM
+IndentWidth: 2
+---
+Language: Cpp
+# Force pointers to the type for C++.
+DerivePointerAlignment: false
+PointerAlignment: Left
+BreakBeforeBraces: Attach
+# AllowShortEnumsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: false
+BreakConstructorInitializers: BeforeComma
+BreakInheritanceList: BeforeComma
+AlwaysBreakTemplateDeclarations: true
+CompactNamespaces: true
+ColumnLimit: 100
+MaxEmptyLinesToKeep: 1
