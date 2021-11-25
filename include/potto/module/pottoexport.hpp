@@ -41,7 +41,7 @@ Potto::POTTO_ERROR ModuleGetClassObject(const Potto::PottoUuid& clsid, const Pot
         error = pEntry->pCachedIUnknown->QueryInterface(Potto::IID_IClassFactory,
                                                         (void**)&pClassFactory);
         if (Potto::POTTO_E_OK == error && pClassFactory)
-          pClassFactory->SetCreatorFunction(pEntry->pfnObjectCreator);
+          pClassFactory->SetCreatorFunction(reinterpret_cast<void*>(pEntry->pfnObjectCreator));
       }
     }
 

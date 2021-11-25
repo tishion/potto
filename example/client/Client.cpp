@@ -1,17 +1,17 @@
 // Client.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
-#include <filesystem>
-#include <potto/pottointerface.hpp>
-#include <potto/pottoptr.hpp>
-#include <potto/pottouuid.hpp>
+#if defined(_WIN32)
 #include <windows.h>
+#endif
+
+#include <ghc/filesystem.hpp>
 
 //#define POTTO_STATIC_LIB
 #include <potto/potto.h>
-
-#include <ghc/filesystem.hpp>
+#include <potto/pottointerface.hpp>
+#include <potto/pottoptr.hpp>
+#include <potto/pottouuid.hpp>
 
 #include "../Ark/include/Ark_CLSID.h"
 #include "../Ark/include/IFlyable.h"
@@ -22,7 +22,11 @@ using namespace Potto;
 
 int main() {
   char szExePath[MAX_PATH] = {0};
+#if defined(_WIN32)
   ::GetModuleFileNameA(NULL, szExePath, _countof(szExePath));
+#else
+  ::readlink("/proc/self/exe", szExePath, PATH_MAX);
+#endif
 
   ghc::filesystem::path exePath = szExePath;
 
