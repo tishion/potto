@@ -10,23 +10,23 @@ POTTO_ERROR Misc::FinalConstruct() {
 void Misc::FinalRelease() {
 }
 
-void Misc::Info(char* msg) {
-  printf("Info: %s\r\n", msg);
+void Misc::Info(const char* msg) {
+  printf("Info: %s\n", msg);
 }
 
-void Misc::Warn(char* msg) {
-  printf("Warn: %s\r\n", msg);
+void Misc::Warn(const char* msg) {
+  printf("Warn: %s\n", msg);
 }
 
-void Misc::Error(char* msg) {
-  printf("Error: %s\r\n", msg);
+void Misc::Error(const char* msg) {
+  printf("Error: %s\n", msg);
 }
 
-void Misc::Fatal(char* msg) {
-  printf("Fatal: %s\r\n", msg);
+void Misc::Fatal(const char* msg) {
+  printf("Fatal: %s\n", msg);
 }
 
-bool Misc::Play(char* file) {
-  printf("Now playing %s\r\n", file);
+bool Misc::Play(const char* file) {
+  printf("Now playing %s\n", file);
   return true;
 }

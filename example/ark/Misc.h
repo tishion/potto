@@ -52,15 +52,15 @@ public:
 
   void FinalRelease();
 
-  virtual void Info(char* msg) override;
+  virtual void Info(const char* msg) override;
 
-  virtual void Warn(char* msg) override;
+  virtual void Warn(const char* msg) override;
 
-  virtual void Error(char* msg) override;
+  virtual void Error(const char* msg) override;
 
-  virtual void Fatal(char* msg) override;
+  virtual void Fatal(const char* msg) override;
 
-  virtual bool Play(char* file) override;
+  virtual bool Play(const char* file) override;
 };
 
 /// <summary>

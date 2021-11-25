@@ -175,7 +175,7 @@ typedef std::weak_ptr<ModuleEntry> ModuleEntryWeakPtr;
 #define EXPORT_C_SYMBOL extern "C" __declspec(dllexport)
 #elif defined(__GNUC__)
 // GCC
-#define EXPORT_C_SYMBOL __attribute__((visibility("default"))) extern "C"
+#define EXPORT_C_SYMBOL extern "C" __attribute__((visibility("default")))
 #else
 #define EXPORT_C_SYMBOL
 #pragma warning Unknown dynamic link import / export semantics.

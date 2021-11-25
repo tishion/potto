@@ -18,6 +18,8 @@
 #include "../Ark/include/ILogger.h"
 #include "../Ark/include/IPlayer.h"
 
+#define MAX_PATH 256
+
 using namespace Potto;
 
 int main() {
@@ -39,18 +41,18 @@ int main() {
     PottoPtr<ILogger> pLogger;
     POTTO_ERROR error = CreateInstance(CLSID_Misc, IIDOF(ILogger), (void**)&pLogger);
     if (POTTO_E_OK == error) {
-      pLogger->Error("test test\r\n");
+      pLogger->Error("test test\n");
       PottoPtr<IPlayer> pPlayer;
       error = CreateInstance(CLSID_Misc, IIDOF(IPlayer), (void**)&pPlayer);
       // error = pLogger->QueryInterface(IIDOF(IPlayer), (void**)&pPlayer);
       if (POTTO_E_OK == error)
         pPlayer->Play("Lost River.mp3");
       else
-        printf("Failed to query interface of IFlyable\r\n");
+        printf("Failed to query interface of IFlyable\n");
     } else
-      printf("Failed to create instance of ILogger\r\n");
+      printf("Failed to create instance of ILogger\n");
   }
-  printf("Object should be destroyed\r\n");
+  printf("Object should be destroyed\n");
 
   return 0;
 }

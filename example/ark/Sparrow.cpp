@@ -1,11 +1,8 @@
-#pragma once
 #include "Sparrow.h"
 
-Sparrow::Sparrow()
-{
+Sparrow::Sparrow() {
 }
 
-bool Sparrow::Fly(int distance)
-{
-	return true;
+bool Sparrow::Fly(int distance) {
+  return true;
 }

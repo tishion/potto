@@ -26,7 +26,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out/bin)
 
 if(WINDOWS)
@@ -34,6 +34,10 @@ if(WINDOWS)
     )
     add_compile_options(
         /utf-8
+    )
+else()
+    add_compile_options(
+        -g
     )
 endif()
 
@@ -85,6 +89,13 @@ else()
         PRIVATE 
             -DPOTTO_EXPORTS
     )    
+endif()
+
+if(NOT WINDOWS)
+target_link_libraries(${PROJECT_NAME}
+    PRIVATE
+        dl
+)
 endif()
 
 add_subdirectory(tools)

@@ -8,6 +8,12 @@
 
 #include "PottoModulePoolManager.h"
 
+#if defined(_WIN32)
+#define PATH_SEPARATOR '\\'
+#else
+#define PATH_SEPARATOR '/'
+#endif
+
 namespace Potto {
 PottoModulePoolManager& PottoModulePoolManager::GetInstance() {
   // Get the singleton instance
@@ -23,8 +29,8 @@ bool PottoModulePoolManager::InitFromLibraryFile(const std::string& libraryPath,
 
   // Save the module root path
   m_moduleRootPath = moduleRootPath;
-  if (moduleRootPath.at(moduleRootPath.size() - 1) != '\\')
-    m_moduleRootPath += '\\';
+  if (moduleRootPath.at(moduleRootPath.size() - 1) != PATH_SEPARATOR)
+    m_moduleRootPath += PATH_SEPARATOR;
 
   // Open file stream
   std::ifstream file(libraryPath);
@@ -79,7 +85,7 @@ bool PottoModulePoolManager::InitFromLibraryFile(const std::string& libraryPath,
         continue;
       }
     }
-    if (modulePath.at(0) == '\\')
+    if (modulePath.at(0) == PATH_SEPARATOR)
       modulePath.erase(modulePath.begin());
 
     std::shared_ptr<std::string> pModulePath = std::make_shared<std::string>(modulePath);

@@ -10,6 +10,7 @@
 #define PTGetProcAddr ::GetProcAddress
 #define PTFreeModule ::FreeLibrary
 #define PTStrCmpNoCase _stricmp
+#define PTModuleExtension ".dll"
 #else
 #include <dlfcn.h>
 #include <string.h>
@@ -19,6 +20,7 @@
 #define PTGetProcAddr ::dlsym
 #define PTFreeModule ::dlclose
 #define PTStrCmpNoCase strcasecmp
+#define PTModuleExtension ".so"
 #endif
 
 #include <fstream>
@@ -134,7 +136,7 @@ void GenerateModuleLibXmlFile(const std::string& inputFolder, const std::string&
   for (ghc::filesystem::recursive_directory_iterator it(inputFolderPath);
        it != ghc::filesystem::recursive_directory_iterator(); it++) {
     std::string extension = it->path().extension().string();
-    if (PTStrCmpNoCase(extension.c_str(), ".dll")) {
+    if (PTStrCmpNoCase(extension.c_str(), PTModuleExtension)) {
       continue;
     }
 
@@ -275,9 +277,8 @@ int main(int argc, char* argv[]) {
         return 0;
       }
     }
-  } else {
-    ShowHelp();
   }
 
+  ShowHelp();
   return 1;
 }
