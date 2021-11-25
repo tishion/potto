@@ -2,15 +2,9 @@
 
 A minimum implementation of COM (Component Object Model), DI/IOC framework
 
-Last build status by [Visual Studio Online](https://www.visualstudio.com/vso/)
+[![Build on Linux](https://github.com/tishion/potto/actions/workflows/build-linux.yml/badge.svg)](https://github.com/tishion/potto/actions/workflows/build-linux.yml)
 
-![build-status](https://tishion.visualstudio.com/_apis/public/build/definitions/26071245-d50d-4615-850e-47f4d41231b9/12/badge) 
-
-Get the Nuget package:
-
-- https://www.nuget.org/packages/potto.v141.dynamic/
-
-- https://www.nuget.org/packages/potto.v141.static/
+[![Build on Windows](https://github.com/tishion/potto/actions/workflows/build-windows.yml/badge.svg)](https://github.com/tishion/potto/actions/workflows/build-windows.yml)
 
 Document:
 
