@@ -13,10 +13,10 @@
 #include <potto/pottoptr.hpp>
 #include <potto/pottouuid.hpp>
 
-#include "../Ark/include/Ark_CLSID.h"
-#include "../Ark/include/IFlyable.h"
-#include "../Ark/include/ILogger.h"
-#include "../Ark/include/IPlayer.h"
+#include "../ark/include/Ark_CLSID.h"
+#include "../ark/include/IFlyable.h"
+#include "../ark/include/ILogger.h"
+#include "../ark/include/IPlayer.h"
 
 #define MAX_PATH 256
 
