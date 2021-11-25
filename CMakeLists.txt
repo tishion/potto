@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(potto)
 
-option(POTTO_BUILD_DEMO "Build the test project" ON)
+option(POTTO_BUILD_DEMO "Build the test project" OFF)
 option(POTTO_STATIC_LIB "Build potto as static library" OFF)
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
@@ -63,17 +63,20 @@ source_group(
     FILES ${potto_SRC_FILES}
 )
 
-add_library(${PROJECT_NAME} SHARED
-    ${potto_INCLUDE_FILES}
-    ${potto_SRC_FILES}
-)
-
 if (POTTO_STATIC_LIB)
+    add_library(${PROJECT_NAME} STATIC
+        ${potto_INCLUDE_FILES}
+        ${potto_SRC_FILES}
+    )
     target_compile_definitions(${PROJECT_NAME}
         PRIVATE 
             -DPOTTO_STATIC_LIB
     )
 else()
+    add_library(${PROJECT_NAME} SHARED
+        ${potto_INCLUDE_FILES}
+        ${potto_SRC_FILES}
+    )
     target_compile_definitions(${PROJECT_NAME}
         PRIVATE 
             -DPOTTO_EXPORTS

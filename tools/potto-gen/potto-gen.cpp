@@ -1,15 +1,32 @@
 // PottoGen.cpp : Defines the entry point for the console application.
 //
 
+#if defined(_WIN32)
 #include <Windows.h>
+#include <shlwapi.h>
 
-#include <filesystem>
+#define PTModHandle HMODULE
+#define PTLoadModule ::LoadLibraryA
+#define PTGetProcAddr ::GetProcAddress
+#define PTFreeModule ::FreeLibrary
+#define PTStrCmpNoCase _stricmp
+#else
+#include <dlfcn.h>
+#include <string.h>
+
+#define PTModHandle void*
+#define PTLoadModule ::dlopen
+#define PTGetProcAddr ::dlsym
+#define PTFreeModule ::dlclose
+#define PTStrCmpNoCase strcasecmp
+#endif
+
 #include <fstream>
 #include <iostream>
 #include <sstream>
-#include <string.h>
 #include <string>
 
+#include <ghc/filesystem.hpp>
 #include <rapidxml/rapidxml.hpp>
 #include <rapidxml/rapidxml_print.hpp>
 
@@ -18,14 +35,19 @@
 
 bool GetModuleIdAndClassInfo(const std::string& inputModuleFile, Potto::PottoUuid& moduleId,
                              Potto::ClassInfoList& classInfoList) {
-  HMODULE hMod = ::LoadLibraryA(inputModuleFile.c_str());
+  PTModHandle hMod = nullptr;
+#if defined(_WIN32)
+  hMod = PTLoadModule(inputModuleFile.c_str());
+#else
+  hMod = PTLoadModule(inputModuleFile.c_str(), RTLD_LAZY);
+#endif
   if (nullptr == hMod)
     return false;
 
   Potto::TypeRegisterModule pfnRegisterModule =
-      (Potto::TypeRegisterModule)::GetProcAddress(hMod, RegisterModuleName);
+      (Potto::TypeRegisterModule)PTGetProcAddr(hMod, RegisterModuleName);
   if (!pfnRegisterModule) {
-    ::FreeLibrary(hMod);
+    PTFreeModule(hMod);
     return false;
   }
 
@@ -36,12 +58,12 @@ bool GetModuleIdAndClassInfo(const std::string& inputModuleFile, Potto::PottoUui
   return true;
 }
 
-void GenerateClassIdHeaderFile(const std::string& inputFile, const std::string outputFolder,
-                               const std::string outputFileName) {
+void GenerateClassIdHeaderFile(const std::string& inputFile, const std::string& outputFolder,
+                               const std::string& outputFileName) {
   if (inputFile.empty())
     return;
 
-  std::tr2::sys::path inputFilePath = inputFile;
+  ghc::filesystem::path inputFilePath = inputFile;
   std::string fileName = outputFileName.empty()
                              ? inputFilePath.filename().replace_extension("").string() + "_CLSID.h"
                              : outputFileName;
@@ -71,7 +93,7 @@ void GenerateClassIdHeaderFile(const std::string& inputFile, const std::string o
   oss << std::endl;
   oss << "#endif // " << headerMacroName;
 
-  std::tr2::sys::path outputFilePath;
+  ghc::filesystem::path outputFilePath;
   if (outputFolder.empty())
     outputFilePath = inputFilePath.replace_filename(fileName);
   else {
@@ -95,7 +117,7 @@ void GenerateModuleLibXmlFile(const std::string& inputFolder, const std::string&
   if (inputFolder.empty())
     return;
 
-  std::tr2::sys::path inputFolderPath = inputFolder;
+  ghc::filesystem::path inputFolderPath = inputFolder;
 
   rapidxml::xml_document<> doc;
 
@@ -109,11 +131,12 @@ void GenerateModuleLibXmlFile(const std::string& inputFolder, const std::string&
   rapidxml::xml_node<>* pLib = doc.allocate_node(rapidxml::node_element, "PottoModuleLib");
   doc.append_node(pLib);
 
-  for (std::tr2::sys::recursive_directory_iterator it(inputFolderPath);
-       it != std::tr2::sys::recursive_directory_iterator(); it++) {
+  for (ghc::filesystem::recursive_directory_iterator it(inputFolderPath);
+       it != ghc::filesystem::recursive_directory_iterator(); it++) {
     std::string extension = it->path().extension().string();
-    if (_stricmp(extension.c_str(), ".dll"))
+    if (PTStrCmpNoCase(extension.c_str(), ".dll")) {
       continue;
+    }
 
     std::string fileName = it->path().filename().string();
 
@@ -161,12 +184,13 @@ void GenerateModuleLibXmlFile(const std::string& inputFolder, const std::string&
     }
   }
 
-  std::tr2::sys::path outputFilePath;
+  ghc::filesystem::path outputFilePath;
   if (outputFile.empty()) {
     outputFilePath = inputFolderPath;
     outputFilePath /= "modulelib.xml";
-  } else
+  } else {
     outputFilePath = outputFile;
+  }
 
   std::cout << "+++ Output File: " << outputFilePath << std::endl;
   try {
@@ -184,11 +208,34 @@ void GenerateModuleLibXmlFile(const std::string& inputFolder, const std::string&
 #define ARG_MODULELIB "-modulelib"
 #define ARG_ROOT "-root"
 
-// pg.exe -classid {input file} {output folder} [output file name]
-// pg.exe -modulelib <input folder> <output file>
+void ShowHelp() {
+  // clang-format off
+  std::cout
+      << "Usage:" << std::endl
+      << " - Generate header file for specified module file:" << std::endl
+      << "pt-gen -classid <input file> [output folder] [output name]" << std::endl
+      << "<input file>: " << std::endl 
+      << "  mandatory, full path name of the potto module file" << std::endl
+      << "[output folder]: " << std::endl 
+      << "  optional, full path to the folder for the output header file, if not provided the parent folder of the input file will be used" << std::endl
+      << "[output name]:" << std::endl 
+      << "  optional, the output file name, if not provided then the output file will be named as the input file name (without extension) with a suffix '_CLSID.h'" << std::endl
+      << std::endl
+      << " - Generate module library database file from module folder:" << std::endl
+      << "pt-gen -modulelib <input folder> <output file>" << std::endl
+      << "<input folder>: " << std::endl 
+      << "  mandatory, full path to the folder which contains the potto module files" << std::endl
+      << "<output file>: " << std::endl 
+      << "  mandatory, full path name of the output library database file" << std::endl
+      ;
+  // clang-format on
+}
+
+// pt-gen -classid <input file> [output folder] [output file name]
+// pt-gen -modulelib <input folder> <output file>
 int main(int argc, char* argv[]) {
   if (argc > 1) {
-    if (0 == _stricmp(argv[1], ARG_CLASSID)) {
+    if (0 == PTStrCmpNoCase(argv[1], ARG_CLASSID)) {
       if (argc >= 3) {
         std::string inputFile = argv[2];
         std::string outputFolder;
@@ -200,7 +247,7 @@ int main(int argc, char* argv[]) {
         std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
                      "+++++++"
                   << std::endl;
-        std::cout << "+++                              Potto code generator                        "
+        std::cout << "+++                              Potto Code Generator                        "
                      "       "
                   << std::endl;
         GenerateClassIdHeaderFile(inputFile, outputFolder, outputFileName);
@@ -209,7 +256,7 @@ int main(int argc, char* argv[]) {
                   << std::endl;
         return 0;
       }
-    } else if (0 == _stricmp(argv[1], ARG_MODULELIB)) {
+    } else if (0 == PTStrCmpNoCase(argv[1], ARG_MODULELIB)) {
       if (argc >= 3) {
         std::string inputFolder = argv[2];
         std::string outputFile;
@@ -228,6 +275,8 @@ int main(int argc, char* argv[]) {
         return 0;
       }
     }
+  } else {
+    ShowHelp();
   }
 
   return 1;

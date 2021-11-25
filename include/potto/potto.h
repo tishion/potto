@@ -2,15 +2,33 @@
 #define POTTO_H_
 #pragma once
 
+#if defined(_MSC_VER)
+// Microsoft
+#define EXPORT_SYMBOL __declspec(dllexport)
+#define IMPORT_SYMBOL __declspec(dllimport)
+#elif defined(__GNUC__)
+// GCC
+#define EXPORT_SYMBOL __attribute__((visibility("default")))
+#define IMPORT_SYMBOL
+#else
+//  do nothing and hope for the best?
+#define EXPORT_SYMBOL
+#define IMPORT_SYMBOL
+#pragma warning Unknown dynamic link import / export semantics.
+#endif
+
 #ifdef POTTO_STATIC_LIB
-#define POTTO_API // For building or refer to static library
+// For building or refer to static library
+#define POTTO_API 
 #else
 #ifdef POTTO_EXPORTS
-#define POTTO_API __declspec(dllexport) // For building dynamic library
+// For building dynamic library
+#define POTTO_API EXPORT_SYMBOL
 #else
-#define POTTO_API __declspec(dllimport) // For refer to dynamic library
-#endif                                  // POTTO_EXPORTS
-#endif                                  // POTTO_STATIC_LIB
+// For refer to dynamic library
+#define POTTO_API IMPORT_SYMBOL
+#endif
+#endif 
 
 #include <string>
 

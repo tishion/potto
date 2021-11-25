@@ -149,7 +149,7 @@ public:
   /// </summary>
   void InternalFinalConstructRelease() {
     InternalRelease();
-    PottoAssert(m_nRefCnt == 0, "Reference count is not zeor.");
+    PottoAssert(m_nRefCnt == 0, "Reference count is not zero");
   }
 
   /// <summary>
@@ -207,8 +207,8 @@ public:
   ///
   /// </summary>
   virtual ~PottoObject() {
-    m_nRefCnt = PROTECT_REFCOUNT;
-    FinalRelease();
+    _BaseClass::m_nRefCnt = PROTECT_REFCOUNT;
+    _BaseClass::FinalRelease();
     PottoModule::GetInstance().Unlock();
   }
 
@@ -217,7 +217,7 @@ public:
   /// </summary>
   /// <param name="p"></param>
   virtual unsigned long AddRef() {
-    return InternalAddRef();
+    return _BaseClass::InternalAddRef();
   }
 
   /// <summary>
@@ -225,7 +225,7 @@ public:
   /// </summary>
   /// <returns></returns>
   virtual unsigned long Release() {
-    unsigned long l = InternalRelease();
+    unsigned long l = _BaseClass::InternalRelease();
     if (l == 0) {
       // Lock the module to avoid DLL unload when destruction of member variables take a long time
       PottoModule::GetInstance().Lock();
@@ -242,7 +242,7 @@ public:
   /// <param name="pp"></param>
   /// <returns></returns>
   virtual POTTO_ERROR QueryInterface(const PottoUuid& riid, void** pp) {
-    return _InternalQueryInterface(riid, pp);
+    return _BaseClass::_InternalQueryInterface(riid, pp);
   }
 
   /// <summary>
@@ -251,8 +251,8 @@ public:
   /// <param name="pp"></param>
   /// <returns></returns>
   template <class Q>
-  POTTO_ERROR QueryInterface(const PottoUuid& pp) {
-    return QueryInterface(__uuidof(Q), (void**)pp);
+  POTTO_ERROR QueryInterface(Q** pp) {
+    return QueryInterface(Q::IID(), (void**)pp);
   }
 
   /// <summary>
@@ -266,8 +266,10 @@ public:
 template <class Base>
 POTTO_ERROR PottoObject<Base>::CreateInstance(PottoObject<Base>** pp) {
   PottoAssert(pp != 0, "");
-  if (pp == 0)
+  if (pp == 0) {
     return POTTO_E_POINTER;
+  }
+
   *pp = 0;
 
   POTTO_ERROR error = POTTO_E_OUTOFMEMORY;
@@ -283,7 +285,7 @@ POTTO_ERROR PottoObject<Base>::CreateInstance(PottoObject<Base>** pp) {
     p->InternalFinalConstructRelease();
 
     if (POTTO_E_OK == error)
-      error = p->QueryInterface(riid, ppv);
+      error = p->QueryInterface(IID_IUnknown, pp);
 
     if (error != POTTO_E_OK) {
       delete p;
@@ -315,8 +317,8 @@ public:
   ///
   /// </summary>
   virtual ~PottoCachedObject() {
-    m_nRefCnt = PROTECT_REFCOUNT;
-    FinalRelease();
+    _BaseClass::m_nRefCnt = PROTECT_REFCOUNT;
+    _BaseClass::FinalRelease();
   }
 
   /// <summary>
@@ -324,7 +326,7 @@ public:
   /// </summary>
   /// <returns></returns>
   virtual unsigned long AddRef() {
-    unsigned long l = InternalAddRef();
+    unsigned long l = _BaseClass::InternalAddRef();
     if (l == 2)
       PottoModule::GetInstance().Lock();
     return l;
@@ -335,7 +337,7 @@ public:
   /// </summary>
   /// <returns></returns>
   virtual unsigned long Release() {
-    unsigned long l = InternalRelease();
+    unsigned long l = _BaseClass::InternalRelease();
     if (l == 0)
       delete this;
     else if (l == 1)
@@ -350,7 +352,7 @@ public:
   /// <param name="pp"></param>
   /// <returns></returns>
   virtual POTTO_ERROR QueryInterface(const PottoUuid& riid, void** pp) {
-    return _InternalQueryInterface(riid, pp);
+    return _BaseClass::_InternalQueryInterface(riid, pp);
   }
 
   /// <summary>
@@ -380,7 +382,7 @@ POTTO_ERROR PottoCachedObject<Base>::CreateInstance(PottoCachedObject<Base>** pp
     p->InternalFinalConstructRelease();
 
     if (POTTO_E_OK == error)
-      error = p->QueryInterface(riid, ppv);
+      error = p->QueryInterface(IID_IUnknown, pp);
 
     if (error != POTTO_E_OK) {
       delete p;
@@ -494,6 +496,10 @@ public:
 /// The begin of the interface entry map.
 /// </summary>
 #define POTTO_BEGIN_INTERFACE_MAP(c)                                                               \
+  const static PottoUuid& CLSID() {                                                                \
+    static PottoUuid clsid(CLSID_##c);                                                             \
+    return clsid;                                                                                  \
+  };                                                                                               \
   POTTO_ERROR _InternalQueryInterface(const PottoUuid& iid, void** ppvObject) {                    \
     return InternalQueryInterface(this, _GetEntries(), iid, ppvObject);                            \
   }                                                                                                \
@@ -519,10 +525,10 @@ public:
   }                                                                                                \
   ;                                                                                                \
   return _entries;                                                                                 \
-  }                                                                                                \
-  virtual unsigned long AddRef() = 0;                                                              \
-  virtual unsigned long Release() = 0;                                                             \
-  virtual POTTO_ERROR QueryInterface(const PottoUuid& interfaceId, void** pp) = 0;
+  } /*                                                                                             \
+virtual unsigned long AddRef() = 0;                                                                \
+virtual unsigned long Release() = 0;                                                               \
+virtual POTTO_ERROR QueryInterface(const PottoUuid& interfaceId, void** pp) = 0;*/
 
 /// <summary>
 /// Define a potto class register.
@@ -534,13 +540,17 @@ namespace Potto {
 /// <summary>
 /// The potto factory.
 /// </summary>
+
+const char* CLSID_PottoClassFactory = "10000000-0000-0000-0000-100000000000";
 class POTTO_DECLARE_NOVTABLE PottoClassFactory
     : public PottoThreadSafeObjectRootBase
     , public IClassFactory {
 public:
+  // clang-format off
   POTTO_BEGIN_INTERFACE_MAP(PottoClassFactory)
-  POTTO_INTERFACE_ENTRY(IClassFactory)
+    POTTO_INTERFACE_ENTRY(IClassFactory)
   POTTO_END_INTERFACE_MAP()
+  // clang-format on
 
   /// <summary>
   ///
@@ -576,7 +586,7 @@ public:
   /// </summary>
   /// <param name="p"></param>
   void SetCreatorFunction(void* p) override {
-    m_pfnObjectCreator = static_cast<TypeObjectCreatorFunction>(p);
+    m_pfnObjectCreator = reinterpret_cast<TypeObjectCreatorFunction>(p);
   }
 
 private:
@@ -586,14 +596,18 @@ private:
 /// <summary>
 /// The potto singleton factory.
 /// </summary>
+///
+const char* CLSID_PottoClassSingletonFactory = "10000000-0000-0000-0000-200000000000";
 template <class T>
 class POTTO_DECLARE_NOVTABLE PottoClassSingletonFactory
     : public PottoThreadSafeObjectRootBase
     , public IClassFactory {
 public:
+  // clang-format off
   POTTO_BEGIN_INTERFACE_MAP(PottoClassSingletonFactory)
-  POTTO_INTERFACE_ENTRY(IClassFactory)
+    POTTO_INTERFACE_ENTRY(IClassFactory)
   POTTO_END_INTERFACE_MAP()
+  // clang-format on
 
   /// <summary>
   ///
@@ -672,7 +686,7 @@ public:
   /// <returns></returns>
   template <class Q>
   static POTTO_ERROR CreateInstance(Q** pp) {
-    return T::_CreatorClass::CreateInstance(__uuidof(Q), (void**)pp);
+    return T::_CreatorClass::CreateInstance(Q::IID(), (void**)pp);
   }
 };
 } // namespace Potto

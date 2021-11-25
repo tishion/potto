@@ -1,4 +1,16 @@
-#include <windows.h>
+#if defined(_WIN32)
+#include <Windows.h>
+#define PTModHandle HMODULE
+#define PTLoadModule ::LoadLibraryA
+#define PTGetProcAddr ::GetProcAddress
+#define PTFreeModule ::FreeLibrary
+#else
+#include <dlfcn.h>
+#define PTModHandle void*
+#define PTLoadModule ::dlopen
+#define PTGetProcAddr ::dlsym
+#define PTFreeModule ::dlclose
+#endif
 
 #include "PottoModuleEntryManager.h"
 
@@ -11,13 +23,15 @@ PottoModuleEntryManager& PottoModuleEntryManager::GetInstance() {
 
 POTTO_ERROR Potto::PottoModuleEntryManager::LoadModule(const std::string& moduleName,
                                                        ModuleEntryPtr& pModule) {
-  HMODULE hMod = nullptr;
+  PTModHandle hMod = nullptr;
   {
     // Find or load the module
     std::lock_guard<std::mutex> lock(m_mtxForLoadModule);
-    hMod = ::GetModuleHandleA(moduleName.c_str());
-    if (nullptr == hMod)
-      hMod = ::LoadLibraryA(moduleName.c_str());
+#if defined(_WIN32)
+    hMod = PTLoadModule(moduleName.c_str());
+#else
+    hMod = PTLoadModule(moduleName.c_str(), RTLD_LAZY);
+#endif
   }
 
   // Module was not found
@@ -26,23 +40,23 @@ POTTO_ERROR Potto::PottoModuleEntryManager::LoadModule(const std::string& module
 
   // Get all required function pointers
   TypeModuleGetClassObject pfnModuleGetClassObject =
-      (TypeModuleGetClassObject)::GetProcAddress(hMod, ModuleGetClassObjectName);
+      (TypeModuleGetClassObject)PTGetProcAddr(hMod, ModuleGetClassObjectName);
   if (!pfnModuleGetClassObject) {
-    ::FreeLibrary(hMod);
+    PTFreeModule(hMod);
     return POTTO_E_EXPORTNOTFOUND;
   }
 
   TypeModuleCanUnloadNow pfnModuleCanUnloadNow =
-      (TypeModuleCanUnloadNow)::GetProcAddress(hMod, ModuleCanUnloadNowName);
+      (TypeModuleCanUnloadNow)PTGetProcAddr(hMod, ModuleCanUnloadNowName);
   if (!pfnModuleCanUnloadNow) {
-    ::FreeLibrary(hMod);
+    PTFreeModule(hMod);
     return POTTO_E_EXPORTNOTFOUND;
   }
 
   TypeRegisterModule pfnRegisterModule =
-      (TypeRegisterModule)::GetProcAddress(hMod, RegisterModuleName);
+      (TypeRegisterModule)PTGetProcAddr(hMod, RegisterModuleName);
   if (!pfnRegisterModule) {
-    ::FreeLibrary(hMod);
+    PTFreeModule(hMod);
     return POTTO_E_EXPORTNOTFOUND;
   }
 
@@ -65,12 +79,12 @@ POTTO_ERROR Potto::PottoModuleEntryManager::LoadModule(const std::string& module
     pModule = pNewModule;
 
   return error;
-}
+} // namespace Potto
 
 POTTO_ERROR Potto::PottoModuleEntryManager::UnloadModule(const ModuleEntryPtr& pModule) {
   // If the module is valid and can be unloaded now then unload it
   if (pModule && POTTO_E_OK == pModule->pfnModuleCanUnloadNow()) {
-    if (::FreeLibrary((HMODULE)(pModule->hMod)))
+    if (PTFreeModule((PTModHandle)(pModule->hMod)))
       return POTTO_E_OK;
   }
 

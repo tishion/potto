@@ -45,7 +45,7 @@ public:
 /// <summary>
 /// The id of <see cref="IClassFactory" />.
 /// </summary>
-const char* const IID_IClassFactory = "10000000-0000-0000-0000-000000000001";
+const char* const IID_IClassFactory = "10000000-0000-0000-0000-100000000001";
 
 /// <summary>
 /// The class factory interface.
@@ -77,7 +77,11 @@ public:
   const char* const IID_##name = iid;                                                              \
   class POTTO_DECLARE_NOVTABLE name : public Potto::IUnknown {                                     \
   public:                                                                                          \
-    virtual ~name(){};
+    virtual ~name(){};                                                                             \
+    static const PottoUuid& IID() {                                                                \
+      static PottoUuid iid(IID##name);                                                             \
+      return iid;                                                                                  \
+    }
 
 /// <summary>
 /// Declares a method.
