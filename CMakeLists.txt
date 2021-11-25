@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(potto)
 
-option(POTTO_BUILD_DEMO "Build the test project" OFF)
+option(POTTO_BUILD_DEMO "Build the test project" ON)
 option(POTTO_STATIC_LIB "Build potto as static library" OFF)
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
@@ -24,6 +24,10 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 # use c+++ 11 standard
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out/bin)
 
 if(WINDOWS)
     add_definitions(

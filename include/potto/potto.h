@@ -11,7 +11,6 @@
 #define EXPORT_SYMBOL __attribute__((visibility("default")))
 #define IMPORT_SYMBOL
 #else
-//  do nothing and hope for the best?
 #define EXPORT_SYMBOL
 #define IMPORT_SYMBOL
 #pragma warning Unknown dynamic link import / export semantics.
@@ -19,7 +18,7 @@
 
 #ifdef POTTO_STATIC_LIB
 // For building or refer to static library
-#define POTTO_API 
+#define POTTO_API
 #else
 #ifdef POTTO_EXPORTS
 // For building dynamic library
@@ -28,7 +27,7 @@
 // For refer to dynamic library
 #define POTTO_API IMPORT_SYMBOL
 #endif
-#endif 
+#endif
 
 #include <string>
 

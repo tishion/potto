@@ -9,12 +9,15 @@ source_group(
     TREE ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}
     FILES ${${PROJECT_NAME}_SRC_FILES}
 )
-add_library(${PROJECT_NAME} OBJECT
+add_library(${PROJECT_NAME} SHARED
     ${${PROJECT_NAME}_SRC_FILES}
 )
 set_target_properties(${PROJECT_NAME}
     PROPERTIES
         FOLDER example
+)
+target_link_libraries(${PROJECT_NAME}
+    potto
 )
 
 ###############################
@@ -28,10 +31,13 @@ source_group(
     TREE ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}
     FILES ${${PROJECT_NAME}_SRC_FILES}
 )
-add_library(${PROJECT_NAME} OBJECT
+add_executable(${PROJECT_NAME}
     ${${PROJECT_NAME}_SRC_FILES}
 )
 set_target_properties(${PROJECT_NAME}
     PROPERTIES
         FOLDER example
+)
+target_link_libraries(${PROJECT_NAME}
+    potto
 )

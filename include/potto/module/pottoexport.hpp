@@ -9,26 +9,6 @@
 #include <potto/pottointerface.hpp>
 #include <potto/pottoptr.hpp>
 
-#ifdef _WIN32
-#ifdef _WIN64
-#pragma comment(linker, "/EXPORT:ModuleCanUnloadNow=?ModuleCanUnloadNow@@YAHXZ,PRIVATE")
-#pragma comment(                                                                                   \
-    linker,                                                                                        \
-    "/EXPORT:ModuleGetClassObject=?ModuleGetClassObject@@YAHAEBVPottoUuid@Potto@@0PEAPEAX@Z,PRIVATE")
-#pragma comment(                                                                                   \
-    linker,                                                                                        \
-    "/EXPORT:RegisterModule=?RegisterModule@@YAHAEAVPottoUuid@Potto@@AEAV?$vector@VClassInfo@Potto@@V?$allocator@VClassInfo@Potto@@@std@@@std@@@Z,PRIVATE")
-#else
-#pragma comment(linker, "/EXPORT:ModuleCanUnloadNow=?ModuleCanUnloadNow@@YAHXZ,PRIVATE")
-#pragma comment(                                                                                   \
-    linker,                                                                                        \
-    "/EXPORT:ModuleGetClassObject=?ModuleGetClassObject@@YAHABVPottoUuid@Potto@@0PAPAX@Z,PRIVATE")
-#pragma comment(                                                                                   \
-    linker,                                                                                        \
-    "/EXPORT:RegisterModule=?RegisterModule@@YAHAAVPottoUuid@Potto@@AAV?$vector@VClassInfo@Potto@@V?$allocator@VClassInfo@Potto@@@std@@@std@@@Z,PRIVATE")
-#endif
-#endif
-
 Potto::POTTO_ERROR ModuleCanUnloadNow() {
   return (Potto::PottoModule::GetInstance().GetLockCount() == 0 ? Potto::POTTO_E_OK
                                                                 : Potto::POTTO_E_FAIL);

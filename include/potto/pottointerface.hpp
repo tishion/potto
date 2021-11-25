@@ -78,9 +78,9 @@ public:
   class POTTO_DECLARE_NOVTABLE name : public Potto::IUnknown {                                     \
   public:                                                                                          \
     virtual ~name(){};                                                                             \
-    static const PottoUuid& IID() {                                                                \
-      static PottoUuid iid(IID##name);                                                             \
-      return iid;                                                                                  \
+    static const Potto::PottoUuid& IID() {                                                         \
+      static Potto::PottoUuid iid_(IID_##name);                                                    \
+      return iid_;                                                                                 \
     }
 
 /// <summary>

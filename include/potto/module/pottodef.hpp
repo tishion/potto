@@ -170,16 +170,29 @@ typedef std::shared_ptr<ModuleEntry> ModuleEntryPtr;
 typedef std::weak_ptr<ModuleEntry> ModuleEntryWeakPtr;
 } // namespace Potto
 
+#if defined(_MSC_VER)
+// Microsoft
+#define EXPORT_C_SYMBOL extern "C" __declspec(dllexport)
+#elif defined(__GNUC__)
+// GCC
+#define EXPORT_C_SYMBOL __attribute__((visibility("default"))) extern "C"
+#else
+#define EXPORT_C_SYMBOL
+#pragma warning Unknown dynamic link import / export semantics.
+#endif
+
 /// <summary>
 /// Name and forward declaration of ModuleCanUnloadNow.
 /// </summary>
 #define ModuleCanUnloadNowName "ModuleCanUnloadNow"
+EXPORT_C_SYMBOL
 Potto::POTTO_ERROR ModuleCanUnloadNow();
 
-/// <summary>
+/// <summary>2
 /// Name and forward declaration of ModuleGetClassObject.
 /// </summary>
 #define ModuleGetClassObjectName "ModuleGetClassObject"
+EXPORT_C_SYMBOL
 Potto::POTTO_ERROR ModuleGetClassObject(const Potto::PottoUuid& clsid, const Potto::PottoUuid& iid,
                                         void** ppv);
 
@@ -187,7 +200,8 @@ Potto::POTTO_ERROR ModuleGetClassObject(const Potto::PottoUuid& clsid, const Pot
 /// Name and forward declaration of RegisterModule.
 /// </summary>
 #define RegisterModuleName "RegisterModule"
-Potto::POTTO_ERROR RegisterModule(Potto::PottoUuid& moduleId, Potto::ClassInfoList& classInfoList);
+EXPORT_C_SYMBOL Potto::POTTO_ERROR RegisterModule(Potto::PottoUuid& moduleId,
+                                                  Potto::ClassInfoList& classInfoList);
 
 /// <summary>
 /// Potto assert.

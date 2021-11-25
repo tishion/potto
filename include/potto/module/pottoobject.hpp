@@ -497,8 +497,8 @@ public:
 /// </summary>
 #define POTTO_BEGIN_INTERFACE_MAP(c)                                                               \
   const static PottoUuid& CLSID() {                                                                \
-    static PottoUuid clsid(CLSID_##c);                                                             \
-    return clsid;                                                                                  \
+    static PottoUuid clsid_(CLSID_##c);                                                            \
+    return clsid_;                                                                                 \
   };                                                                                               \
   POTTO_ERROR _InternalQueryInterface(const PottoUuid& iid, void** ppvObject) {                    \
     return InternalQueryInterface(this, _GetEntries(), iid, ppvObject);                            \
@@ -541,7 +541,7 @@ namespace Potto {
 /// The potto factory.
 /// </summary>
 
-const char* CLSID_PottoClassFactory = "10000000-0000-0000-0000-100000000000";
+const char* const CLSID_PottoClassFactory = "10000000-0000-0000-0000-100000000000";
 class POTTO_DECLARE_NOVTABLE PottoClassFactory
     : public PottoThreadSafeObjectRootBase
     , public IClassFactory {
@@ -597,7 +597,7 @@ private:
 /// The potto singleton factory.
 /// </summary>
 ///
-const char* CLSID_PottoClassSingletonFactory = "10000000-0000-0000-0000-200000000000";
+const char* const CLSID_PottoClassSingletonFactory = "10000000-0000-0000-0000-200000000000";
 template <class T>
 class POTTO_DECLARE_NOVTABLE PottoClassSingletonFactory
     : public PottoThreadSafeObjectRootBase
