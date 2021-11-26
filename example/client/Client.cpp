@@ -3,7 +3,12 @@
 
 #if defined(_WIN32)
 #include <windows.h>
+#define PATH_BUFFER_LIMIT MAX_PATH
+#else
+#define PATH_BUFFER_LIMIT PATH_MAX
 #endif
+
+#include <iostream>
 
 #include <ghc/filesystem.hpp>
 
@@ -13,22 +18,24 @@
 #include <potto/pottoptr.hpp>
 #include <potto/pottouuid.hpp>
 
-#include "../ark/include/Ark_CLSID.h"
+#include "../ark/include/ark_CLSID.h"
+
 #include "../ark/include/IFlyable.h"
 #include "../ark/include/ILogger.h"
 #include "../ark/include/IPlayer.h"
 
-#define MAX_PATH 256
-
 using namespace Potto;
 
 int main() {
-  char szExePath[MAX_PATH] = {0};
+  char szExePath[PATH_BUFFER_LIMIT] = {0};
 #if defined(_WIN32)
-  ::GetModuleFileNameA(NULL, szExePath, _countof(szExePath));
+  if (::GetModuleFileNameA(NULL, szExePath, PATH_BUFFER_LIMIT <= 0) {
 #else
-  ::readlink("/proc/self/exe", szExePath, PATH_MAX);
+  if (::readlink("/proc/self/exe", szExePath, PATH_BUFFER_LIMIT) <= 0) {
 #endif
+    std::cerr << "Failed to get self path" << std::endl;
+    return -1;
+  }
 
   ghc::filesystem::path exePath = szExePath;
 
@@ -36,23 +43,43 @@ int main() {
   ghc::filesystem::path moduleLibPath = moduleRootPath;
   moduleLibPath /= "modulelib.xml";
 
-  Initialize(moduleLibPath.string(), moduleRootPath.string());
-  {
+  std::cout << "Initializing Potto ..." << std::endl;
+  if (POTTO_E_OK == Initialize(moduleLibPath.string(), moduleRootPath.string())) {
+    std::cout << "  [OK]" << std::endl;
+
+    std::cout << "Creating Misc instance and querying ILogger interface ..." << std::endl;
     PottoPtr<ILogger> pLogger;
     POTTO_ERROR error = CreateInstance(CLSID_Misc, IIDOF(ILogger), (void**)&pLogger);
-    if (POTTO_E_OK == error) {
-      pLogger->Error("test test\n");
-      PottoPtr<IPlayer> pPlayer;
-      error = CreateInstance(CLSID_Misc, IIDOF(IPlayer), (void**)&pPlayer);
-      // error = pLogger->QueryInterface(IIDOF(IPlayer), (void**)&pPlayer);
-      if (POTTO_E_OK == error)
-        pPlayer->Play("Lost River.mp3");
-      else
-        printf("Failed to query interface of IFlyable\n");
-    } else
-      printf("Failed to create instance of ILogger\n");
+    if (POTTO_E_OK != error) {
+      std::cerr << "  [Failed]" << std::endl;
+      return -1;
+    } else {
+      std::cout << "  [OK]" << std::endl;
+    }
+
+    std::cout << "Invoking ILogger::Error() method ..." << std::endl;
+    pLogger->Error("test test");
+
+    std::cout << "Querying IPlayer interface from ILogger interface ..." << std::endl;
+    PottoPtr<IPlayer> pPlayer;
+    error = pLogger->QueryInterface(IIDOF(IPlayer), (void**)&pPlayer);
+    if (POTTO_E_OK != error) {
+      std::cerr << "  [Failed]" << std::endl;
+      return -1;
+    } else {
+      std::cout << "  [OK]" << std::endl;
+    }
+
+    std::cout << "Invoking IPlayer::Play() method ..." << std::endl;
+    if (!pPlayer->Play("Lost River.mp3")) {
+      std::cerr << "  [Failed]" << std::endl;
+    } else {
+      std::cout << "  [OK]" << std::endl;
+    }
+
+  } else {
+    std::cerr << "  [Failed]" << std::endl;
   }
-  printf("Object should be destroyed\n");
 
   return 0;
 }

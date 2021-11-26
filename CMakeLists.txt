@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 project(potto)
 
 option(POTTO_BUILD_DEMO "Build the test project" ON)
-option(POTTO_STATIC_LIB "Build potto as static library" OFF)
+option(POTTO_BUILD_STATIC "Build potto as static library" OFF)
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     set(WINDOWS TRUE)
@@ -24,10 +24,6 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 # use c+++ 11 standard
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out/bin)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out/bin)
 
 if(WINDOWS)
     add_definitions(
@@ -71,13 +67,13 @@ source_group(
     FILES ${potto_SRC_FILES}
 )
 
-if (POTTO_STATIC_LIB)
+if (POTTO_BUILD_STATIC)
     add_library(${PROJECT_NAME} STATIC
         ${potto_INCLUDE_FILES}
         ${potto_SRC_FILES}
     )
     target_compile_definitions(${PROJECT_NAME}
-        PRIVATE 
+        PUBLIC 
             -DPOTTO_STATIC_LIB
     )
 else()
@@ -97,6 +93,27 @@ target_link_libraries(${PROJECT_NAME}
         dl
 )
 endif()
+
+install(DIRECTORY include/
+    CONFIGURATIONS Release
+        DESTINATION potto/include
+)
+install(DIRECTORY include/
+    CONFIGURATIONS Debug
+        DESTINATION debug/potto/include
+)
+install(TARGETS ${PROJECT_NAME}
+    CONFIGURATIONS Release
+        ARCHIVE DESTINATION potto/lib
+        LIBRARY DESTINATION potto/bin
+        RUNTIME DESTINATION potto/bin
+)
+install(TARGETS ${PROJECT_NAME}
+    CONFIGURATIONS Debug
+        ARCHIVE DESTINATION debug/potto/lib
+        LIBRARY DESTINATION debug/potto/bin
+        RUNTIME DESTINATION debug/potto/bin
+)
 
 add_subdirectory(tools)
 
