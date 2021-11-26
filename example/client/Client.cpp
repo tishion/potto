@@ -29,7 +29,7 @@ using namespace Potto;
 int main() {
   char szExePath[PATH_BUFFER_LIMIT] = {0};
 #if defined(_WIN32)
-  if (::GetModuleFileNameA(NULL, szExePath, PATH_BUFFER_LIMIT <= 0) {
+  if (::GetModuleFileNameA(NULL, szExePath, PATH_BUFFER_LIMIT) <= 0) {
 #else
   if (::readlink("/proc/self/exe", szExePath, PATH_BUFFER_LIMIT) <= 0) {
 #endif
