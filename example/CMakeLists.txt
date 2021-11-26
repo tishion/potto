@@ -52,6 +52,7 @@ add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND "$<TARGET_FILE:pt-gen>" -classid 
         "$<TARGET_FILE:${PROJECT_NAME}>" 
         "${CMAKE_CURRENT_SOURCE_DIR}/ark/include"
+        "${PROJECT_NAME}_CLSID.h"
 
     DEPENDS
         "$<TARGET_FILE:pt-gen>"
