@@ -1,11 +1,3 @@
-/**
- * @file pottoerror.h
- *
- * Interfaces to Data Buffer.
- *
- * This header define the interfaces of general purpose dynamic data buffer that
- * implemented by Equinox.
- */
 #ifndef POTTOERROR_H_
 #define POTTOERROR_H_
 #pragma once
