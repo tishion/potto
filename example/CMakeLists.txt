@@ -94,6 +94,13 @@ set_target_properties(${PROJECT_NAME}
         FOLDER example
 )
 
+if (NOT WINDOWS)
+    set_target_properties(${PROJECT_NAME}
+        PROPERTIES
+            INSTALL_RPATH @executable_path
+    )
+endif()
+
 target_link_libraries(${PROJECT_NAME}
     potto
 )
