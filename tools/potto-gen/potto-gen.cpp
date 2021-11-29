@@ -10,7 +10,6 @@
 #define PTGetProcAddr ::GetProcAddress
 #define PTFreeModule ::FreeLibrary
 #define PTStrCmpNoCase _stricmp
-#define PTModuleExtension ".dll"
 #else
 #include <dlfcn.h>
 #include <string.h>
@@ -20,6 +19,13 @@
 #define PTGetProcAddr ::dlsym
 #define PTFreeModule ::dlclose
 #define PTStrCmpNoCase strcasecmp
+#endif
+
+#if defined(_WIN32)
+#define PTModuleExtension ".dll"
+#elif defined(__APPLE__)
+#define PTModuleExtension ".dylib"
+#else
 #define PTModuleExtension ".so"
 #endif
 

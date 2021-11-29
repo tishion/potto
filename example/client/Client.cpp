@@ -8,6 +8,10 @@
 #define PATH_BUFFER_LIMIT PATH_MAX
 #endif
 
+#if defined(__APPLE__)
+#include <libproc.h>
+#endif
+
 #include <iostream>
 
 #include <ghc/filesystem.hpp>
@@ -30,6 +34,9 @@ int main() {
   char szExePath[PATH_BUFFER_LIMIT] = {0};
 #if defined(_WIN32)
   if (::GetModuleFileNameA(NULL, szExePath, PATH_BUFFER_LIMIT) <= 0) {
+#elif defined(__APPLE__)
+  pid_t pid = getpid();
+  if (::proc_pidpath(pid, szExePath, PATH_BUFFER_LIMIT) <= 0) {
 #else
   if (::readlink("/proc/self/exe", szExePath, PATH_BUFFER_LIMIT) <= 0) {
 #endif
