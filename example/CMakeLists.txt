@@ -94,10 +94,15 @@ set_target_properties(${PROJECT_NAME}
         FOLDER example
 )
 
-if (NOT WINDOWS)
+if (APPLE)
     set_target_properties(${PROJECT_NAME}
         PROPERTIES
             INSTALL_RPATH @executable_path
+    )
+elseif (LINUX OR ANDROID)
+set_target_properties(${PROJECT_NAME}
+    PROPERTIES
+        INSTALL_RPATH $ORIGIN
     )
 endif()
 
