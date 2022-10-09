@@ -2,7 +2,7 @@
 
 cmake \
     -S . \
-    -B "$(pwd)/out/build/linux-static" \
+    -B "$(pwd)/.build/linux-static" \
     -G "Unix Makefiles" \
     -DPOTTO_BUILD_STATIC=ON \
     -DCMAKE_BUILD_TYPE:STRING="Release" \

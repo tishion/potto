@@ -2,7 +2,7 @@
 
 cmake \
     -S . \
-    -B "$(pwd)/out/build/linux-static-debug" \
+    -B "$(pwd)/.build/linux-static-debug" \
     -G "Unix Makefiles" \
     -DPOTTO_BUILD_STATIC=ON \
     -DCMAKE_BUILD_TYPE:STRING="Debug" \
