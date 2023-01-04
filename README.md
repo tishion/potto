@@ -8,4 +8,4 @@ A minimum implementation of COM (Component Object Model), DI/IOC framework
 
 Document:
 
-- https://tishion.github.io/Potto/document/html/index.html
+- https://tishion.github.io/potto/document/html/index.html
