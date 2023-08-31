@@ -27,7 +27,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if(WINDOWS)
+if(MSVC)
     add_definitions(
     )
     add_compile_options(
