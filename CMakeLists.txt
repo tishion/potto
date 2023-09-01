@@ -36,7 +36,7 @@ endif()
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # detect whether C++ 17 is supported or not
-list(FIND CMAKE_CXX_COMPILE_FEATURES cxx_std_11 CXX_17_SUPPORTED)
+list(FIND CMAKE_CXX_COMPILE_FEATURES cxx_std_17 CXX_17_SUPPORTED)
 
 if(CXX_17_SUPPORTED)
     # use c+++ 17 standard
