@@ -11,26 +11,26 @@ add_executable(${PROJECT_NAME}
 
 set_target_properties(${PROJECT_NAME}
     PROPERTIES
-        FOLDER tools
+    FOLDER tools
 )
 
-if(WINDOWS)
+if(OS_WINDOWS)
     target_link_libraries(${PROJECT_NAME}
         PRIVATE
-            shlwapi
+        shlwapi
     )
 else()
     target_link_libraries(${PROJECT_NAME}
         PRIVATE
-            dl
+        dl
     )
 endif()
 
 install(TARGETS ${PROJECT_NAME}
     CONFIGURATIONS Release
-        DESTINATION tools
+    DESTINATION tools
 )
 install(TARGETS ${PROJECT_NAME}
     CONFIGURATIONS Debug
-        DESTINATION debug/tools
+    DESTINATION debug/tools
 )
