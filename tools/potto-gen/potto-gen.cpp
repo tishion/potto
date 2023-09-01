@@ -34,7 +34,13 @@
 #include <sstream>
 #include <string>
 
+#if defined(CXX_17_ENABLED)
+#include <filesystem>
+#define fsns std
+#else
 #include <ghc/filesystem.hpp>
+#define fsns ghc
+#endif
 #include <rapidxml/rapidxml.hpp>
 #include <rapidxml/rapidxml_print.hpp>
 
@@ -71,7 +77,7 @@ void GenerateClassIdHeaderFile(const std::string& inputFile, const std::string& 
   if (inputFile.empty())
     return;
 
-  ghc::filesystem::path inputFilePath = inputFile;
+  fsns::filesystem::path inputFilePath = inputFile;
   std::string fileName = outputFileName.empty()
                              ? inputFilePath.filename().replace_extension("").string() + "_CLSID.h"
                              : outputFileName;
@@ -101,7 +107,7 @@ void GenerateClassIdHeaderFile(const std::string& inputFile, const std::string& 
   oss << std::endl;
   oss << "#endif // " << headerMacroName;
 
-  ghc::filesystem::path outputFilePath;
+  fsns::filesystem::path outputFilePath;
   if (outputFolder.empty())
     outputFilePath = inputFilePath.replace_filename(fileName);
   else {
@@ -125,7 +131,7 @@ void GenerateModuleLibXmlFile(const std::string& inputFolder, const std::string&
   if (inputFolder.empty())
     return;
 
-  ghc::filesystem::path inputFolderPath = inputFolder;
+  fsns::filesystem::path inputFolderPath = inputFolder;
 
   rapidxml::xml_document<> doc;
 
@@ -139,8 +145,8 @@ void GenerateModuleLibXmlFile(const std::string& inputFolder, const std::string&
   rapidxml::xml_node<>* pLib = doc.allocate_node(rapidxml::node_element, "PottoModuleLib");
   doc.append_node(pLib);
 
-  for (ghc::filesystem::recursive_directory_iterator it(inputFolderPath);
-       it != ghc::filesystem::recursive_directory_iterator(); it++) {
+  for (fsns::filesystem::recursive_directory_iterator it(inputFolderPath);
+       it != fsns::filesystem::recursive_directory_iterator(); it++) {
     std::string extension = it->path().extension().string();
     if (PTStrCmpNoCase(extension.c_str(), PTModuleExtension)) {
       continue;
@@ -192,7 +198,7 @@ void GenerateModuleLibXmlFile(const std::string& inputFolder, const std::string&
     }
   }
 
-  ghc::filesystem::path outputFilePath;
+  fsns::filesystem::path outputFilePath;
   if (outputFile.empty()) {
     outputFilePath = inputFolderPath;
     outputFilePath /= "modulelib.xml";

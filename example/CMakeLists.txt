@@ -1,26 +1,26 @@
-if (NOT POTTO_BUILD_STATIC)
+if(NOT POTTO_BUILD_STATIC)
     if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.21")
         install(IMPORTED_RUNTIME_ARTIFACTS potto
-            CONFIGURATIONS Release 
-                DESTINATION example
+            CONFIGURATIONS Release
+            DESTINATION example
         )
         install(IMPORTED_RUNTIME_ARTIFACTS potto
-            CONFIGURATIONS Debug 
-                DESTINATION debug/example
+            CONFIGURATIONS Debug
+            DESTINATION debug/example
         )
-    else ()
+    else()
         install(FILES $<TARGET_FILE:potto>
-            CONFIGURATIONS Release 
-                DESTINATION example
+            CONFIGURATIONS Release
+            DESTINATION example
         )
         install(FILES $<TARGET_FILE:potto>
-            CONFIGURATIONS Debug 
-                DESTINATION debug/example
+            CONFIGURATIONS Debug
+            DESTINATION debug/example
         )
     endif()
 endif()
 
-###############################
+# ##############################
 # Ark
 project(ark)
 
@@ -40,38 +40,38 @@ add_library(${PROJECT_NAME} SHARED
 
 set_target_properties(${PROJECT_NAME}
     PROPERTIES
-        FOLDER example
+    FOLDER example
 )
 
 target_link_libraries(${PROJECT_NAME}
     potto
 )
 
-#  call pt-gen to generate the CLSID header file for this module
+# call pt-gen to generate the CLSID header file for this module
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND "$<TARGET_FILE:pt-gen>" -classid 
-        "$<TARGET_FILE:${PROJECT_NAME}>" 
-        "${CMAKE_CURRENT_SOURCE_DIR}/ark/include"
-        "${PROJECT_NAME}_CLSID.h"
+    COMMAND "$<TARGET_FILE:pt-gen>" -classid
+    "$<TARGET_FILE:${PROJECT_NAME}>"
+    "${CMAKE_CURRENT_SOURCE_DIR}/ark/include"
+    "${PROJECT_NAME}_CLSID.h"
 
     DEPENDS
-        "$<TARGET_FILE:pt-gen>"
-        "$<TARGET_FILE:${PROJECT_NAME}>"
+    "$<TARGET_FILE:pt-gen>"
+    "$<TARGET_FILE:${PROJECT_NAME}>"
 
     VERBATIM
 )
 
 install(TARGETS ${PROJECT_NAME}
     CONFIGURATIONS Release
-        DESTINATION example
+    DESTINATION example
 )
 
 install(TARGETS ${PROJECT_NAME}
     CONFIGURATIONS Debug
-        DESTINATION debug/example
+    DESTINATION debug/example
 )
 
-###############################
+# ##############################
 # Client
 project(client)
 
@@ -91,17 +91,17 @@ add_executable(${PROJECT_NAME}
 
 set_target_properties(${PROJECT_NAME}
     PROPERTIES
-        FOLDER example
+    FOLDER example
 )
 
-if (APPLE)
+if(OS_APPLE)
     set_target_properties(${PROJECT_NAME}
         PROPERTIES
-            INSTALL_RPATH @executable_path
+        INSTALL_RPATH @executable_path
     )
-elseif (LINUX OR ANDROID)
-set_target_properties(${PROJECT_NAME}
-    PROPERTIES
+elseif(OS_LINUX OR OS_ANDROID)
+    set_target_properties(${PROJECT_NAME}
+        PROPERTIES
         INSTALL_RPATH $ORIGIN
     )
 endif()
@@ -114,47 +114,47 @@ add_dependencies(${PROJECT_NAME}
     ark
 )
 
-if (NOT POTTO_BUILD_STATIC)
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy
-        "$<TARGET_FILE:potto>" 
+if(NOT POTTO_BUILD_STATIC)
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        "$<TARGET_FILE:potto>"
         "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
 
-    DEPENDS
+        DEPENDS
         "$<TARGET_FILE:potto>"
 
-    VERBATIM
-)
+        VERBATIM
+    )
 endif()
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND "$<TARGET_FILE:pt-gen>" -modulelib 
-        "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
-        "$<TARGET_FILE_DIR:${PROJECT_NAME}>/modulelib.xml"
+    COMMAND "$<TARGET_FILE:pt-gen>" -modulelib
+    "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
+    "$<TARGET_FILE_DIR:${PROJECT_NAME}>/modulelib.xml"
 
     DEPENDS
-        "$<TARGET_FILE:pt-gen>"
-        "$<TARGET_FILE:ark>"
+    "$<TARGET_FILE:pt-gen>"
+    "$<TARGET_FILE:ark>"
 
     VERBATIM
 )
 
 install(TARGETS ${PROJECT_NAME}
     CONFIGURATIONS Release
-        DESTINATION example
+    DESTINATION example
 )
 
 install(TARGETS ${PROJECT_NAME}
     CONFIGURATIONS Debug
-        DESTINATION debug/example
+    DESTINATION debug/example
 )
 
 install(FILES $<TARGET_FILE_DIR:${PROJECT_NAME}>/modulelib.xml
     CONFIGURATIONS Release
-        DESTINATION example
+    DESTINATION example
 )
 
 install(DIRECTORY $<TARGET_FILE_DIR:${PROJECT_NAME}>/modulelib.xml
     CONFIGURATIONS Debug
-        DESTINATION debug/example
+    DESTINATION debug/example
 )

@@ -3,20 +3,31 @@
 
 #if defined(_WIN32)
 #include <windows.h>
+#elif defined(__linux__)
+#include <unistd.h>
+#include <linux/limits.h>
+#elif defined(__APPLE__)
+#include <unistd.h>
+#include <libproc.h>
+#endif
+
+#if defined(_WIN32)
 #define PATH_BUFFER_LIMIT MAX_PATH
 #else
 #define PATH_BUFFER_LIMIT PATH_MAX
 #endif
 
-#if defined(__APPLE__)
-#include <libproc.h>
-#endif
-
 #include <iostream>
 
+#if defined(CXX_17_ENABLED)
+#include <filesystem>
+#define fsns std
+#else
 #include <ghc/filesystem.hpp>
+#define fsns ghc
+#endif
 
-//#define POTTO_STATIC_LIB
+// #define POTTO_STATIC_LIB
 #include <potto/potto.h>
 #include <potto/pottointerface.hpp>
 #include <potto/pottoptr.hpp>
@@ -44,10 +55,10 @@ int main() {
     return -1;
   }
 
-  ghc::filesystem::path exePath = szExePath;
+  fsns::filesystem::path exePath = szExePath;
 
-  ghc::filesystem::path moduleRootPath = exePath.parent_path();
-  ghc::filesystem::path moduleLibPath = moduleRootPath;
+  fsns::filesystem::path moduleRootPath = exePath.parent_path();
+  fsns::filesystem::path moduleLibPath = moduleRootPath;
   moduleLibPath /= "modulelib.xml";
 
   std::cout << "Initializing Potto ..." << std::endl;
