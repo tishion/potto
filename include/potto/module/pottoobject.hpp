@@ -496,14 +496,14 @@ public:
 /// The begin of the interface entry map.
 /// </summary>
 #define POTTO_BEGIN_INTERFACE_MAP(c)                                                               \
-  const static PottoUuid& CLSID() {                                                                \
-    static PottoUuid clsid_(CLSID_##c);                                                            \
+  const static Potto::PottoUuid& CLSID() {                                                         \
+    static Potto::PottoUuid clsid_(CLSID_##c);                                                     \
     return clsid_;                                                                                 \
   };                                                                                               \
-  POTTO_ERROR _InternalQueryInterface(const PottoUuid& iid, void** ppvObject) {                    \
+  POTTO_ERROR _InternalQueryInterface(const Potto::PottoUuid& iid, void** ppvObject) {             \
     return InternalQueryInterface(this, _GetEntries(), iid, ppvObject);                            \
   }                                                                                                \
-  const static InterfaceEntry* _GetEntries() {                                                     \
+  const static Potto::InterfaceEntry* _GetEntries() {                                              \
     typedef c _PottoObjectType;                                                                    \
     static const InterfaceEntry _entries[] = {
 
@@ -521,7 +521,7 @@ public:
 /// The end of the interface entry map.
 /// </summary>
 #define POTTO_END_INTERFACE_MAP()                                                                  \
-  { PottoUuid(), INTERFACE_INVALID_OFFSET }                                                        \
+  { Potto::PottoUuid(), INTERFACE_INVALID_OFFSET }                                                 \
   }                                                                                                \
   ;                                                                                                \
   return _entries;                                                                                 \
