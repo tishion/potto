@@ -84,7 +84,7 @@ file(GLOB_RECURSE potto_INCLUDE_FILES
     include/*.hpp
 )
 source_group(
-    TREE ${CMAKE_SOURCE_DIR}/include/potto
+    TREE ${CMAKE_CURRENT_SOURCE_DIR}/include/potto
     PREFIX include
     FILES ${potto_INCLUDE_FILES}
 )
@@ -97,7 +97,7 @@ file(GLOB_RECURSE potto_SRC_FILES
     src/*.cpp
 )
 source_group(
-    TREE ${CMAKE_SOURCE_DIR}
+    TREE ${CMAKE_CURRENT_SOURCE_DIR}
     FILES ${potto_SRC_FILES}
 )
 
