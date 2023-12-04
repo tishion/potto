@@ -500,12 +500,12 @@ public:
     static Potto::PottoUuid clsid_(CLSID_##c);                                                     \
     return clsid_;                                                                                 \
   };                                                                                               \
-  POTTO_ERROR _InternalQueryInterface(const Potto::PottoUuid& iid, void** ppvObject) {             \
+  Potto::POTTO_ERROR _InternalQueryInterface(const Potto::PottoUuid& iid, void** ppvObject) {      \
     return InternalQueryInterface(this, _GetEntries(), iid, ppvObject);                            \
   }                                                                                                \
   const static Potto::InterfaceEntry* _GetEntries() {                                              \
     typedef c _PottoObjectType;                                                                    \
-    static const InterfaceEntry _entries[] = {
+    static const Potto::InterfaceEntry _entries[] = {
 
 /// <summary>
 /// Gets the offset of This pointer.
