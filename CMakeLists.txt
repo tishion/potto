@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(potto)
 
+option(POTTO_BUILD_GENTOOL "Build the gen tool project" ON)
 option(POTTO_BUILD_DEMO "Build the test project" ON)
 option(POTTO_BUILD_STATIC "Build potto as static library" OFF)
 
@@ -149,7 +150,9 @@ install(TARGETS ${PROJECT_NAME}
     RUNTIME DESTINATION debug/potto/bin
 )
 
-add_subdirectory(tools)
+if(POTTO_BUILD_GENTOOL)
+    add_subdirectory(tools)
+endif()
 
 # add demo project
 if(POTTO_BUILD_DEMO)
