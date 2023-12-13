@@ -33,7 +33,7 @@
 #include <potto/pottoptr.hpp>
 #include <potto/pottouuid.hpp>
 
-#include "../ark/include/ark_CLSID.h"
+#include "../ark/include/libark_CLSID.h"
 
 #include "../ark/include/IFlyable.h"
 #include "../ark/include/ILogger.h"
