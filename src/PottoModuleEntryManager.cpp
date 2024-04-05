@@ -1,7 +1,7 @@
 #if defined(_WIN32)
 #include <Windows.h>
 #define PTModHandle HMODULE
-#define PTLoadModule ::LoadLibraryA
+#define PTLoadModule ::LoadLibraryW
 #define PTGetProcAddr ::GetProcAddress
 #define PTFreeModule ::FreeLibrary
 #else
@@ -11,6 +11,8 @@
 #define PTGetProcAddr ::dlsym
 #define PTFreeModule ::dlclose
 #endif
+
+#include <filesystem>
 
 #include "PottoModuleEntryManager.h"
 
@@ -28,7 +30,8 @@ POTTO_ERROR Potto::PottoModuleEntryManager::LoadModule(const std::string& module
     // Find or load the module
     std::lock_guard<std::mutex> lock(m_mtxForLoadModule);
 #if defined(_WIN32)
-    hMod = PTLoadModule(moduleName.c_str());
+    std::filesystem::path moduleNamePath = std::filesystem::u8path(moduleName);
+    hMod = PTLoadModule(moduleNamePath.wstring().c_str());
 #else
     hMod = PTLoadModule(moduleName.c_str(), RTLD_LAZY);
 #endif
